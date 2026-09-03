@@ -28,12 +28,7 @@ contract DemoTreasuryVault {
     ///      tuple out of `log.data` uniformly. Off-chain workers still filter by emitter +
     ///      topic0.
     event RebalanceExecuted(
-        bytes32 mandateId,
-        address executor,
-        address assetIn,
-        address assetOut,
-        uint256 amountIn,
-        uint256 amountOut
+        bytes32 mandateId, address executor, address assetIn, address assetOut, uint256 amountIn, uint256 amountOut
     );
     event RateSet(address indexed assetIn, address indexed assetOut, uint256 rate1e18);
     event RevertInjected(bytes32 indexed mandateId);

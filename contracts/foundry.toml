@@ -16,3 +16,8 @@ verbosity = 3
 [rpc_endpoints]
 creditcoin_cc3 = "${CREDITCOIN_RPC_URL}"
 sepolia = "${SEPOLIA_RPC_URL}"
+
+[invariant]
+runs = 128
+depth = 64
+fail_on_revert = false

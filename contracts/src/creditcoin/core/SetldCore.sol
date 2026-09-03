@@ -175,7 +175,10 @@ contract SetldCore {
         if (!cfg.active) revert TemplateInactive(templateId);
         if (acceptanceDeadline <= block.timestamp) revert DeadlineInPast();
         if (executionEndBlock <= executionStartBlock) revert DeadlineWindowInvalid();
-        if (proofDeadline <= executionEndBlock) revert ProofDeadlineTooEarly();
+        // execution*Block are SOURCE-chain (Sepolia) block numbers; proofDeadline is a
+        // CREDITCOIN block number (PRD 17.5, different clocks). It only has to be in this
+        // chain's future so finalizeTimeout has a well-defined trigger.
+        if (proofDeadline <= block.number) revert ProofDeadlineTooEarly();
         if (econ.rewardAmount == 0 || econ.executorBond == 0 || econ.creatorBond == 0) revert ZeroAmount();
 
         bytes32 termsHash = keccak256(abi.encode(terms));

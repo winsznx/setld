@@ -6,14 +6,14 @@
     "chainIdHex": "0x18e8f",
     "rpc": "https://rpc.cc3-testnet.creditcoin.network/rpc",
     "explorer": "https://dashboard.cc3-testnet.creditcoin.network/",
-    "blockAtRecord": 5425905,
+    "blockAtRecord": 5425941,
     "evmVersionUsed": "london (CC3 RPC omits mixHash; foundry block polling incompatible, deploys done via cast/ethers)",
     "contracts": {
-      "SetldCore": "0x2d069f379B8C67c89DBF2e7dd2EFA2B4D7F17fC7",
-      "SetldVault": "0xCF1D20d9a00886e0ce79792aab1c92F732e359bB",
-      "SetldExecutorRegistry": "0x904159721CAde846E71f226B5b025BbC1A7868E0",
-      "SetldAttestcoinAdapter": "0x8987F23d289DFa6cA88cc013C46C498cd5D7e2c4",
-      "tSETLD": "0x4872F02B2FD1104F66784a27a08822354AdCA5f2"
+      "SetldCore": "0x51bc24EABC070ed043Bd1c4d7A510ddd6AFe07C6",
+      "SetldVault": "0x3a1f476b5A24CE85A173360e6D0e86A2dDAf7d5d",
+      "SetldExecutorRegistry": "0x7E873746199c7869f37db1074787A4d78038af91",
+      "SetldAttestcoinAdapter": "0x324D83Ed022cC976F602712eaecf6C37Bd34ddF3",
+      "tSETLD": "0xf30A0f56AF00D0f514fEE13D2f48aDD49A7AFE1A"
     },
     "attestcoin": {
       "blockProverPrecompile": "0x0000000000000000000000000000000000000FD2",
@@ -22,13 +22,14 @@
       "proofBuilder": "https://proof-gen-api.cc3-testnet.creditcoin.network"
     },
     "templateId": "0x22ab9b097675d9b6da95abf9fa499d73091ba2c6c7406d230ad33321976ba0c3",
-    "templateRegisteredTx": "0x03c86201daa9e8088adf9e7c0892805db8b48bde2ab3e15371e9ecff0a82bd56",
+    "templateRegisteredTx": "0xbbbc3b85220206437f4dc62ef65cb9f63b46accdcc905f7fdef7445b9a6f6c6d",
     "operator": "0xA629431b12fcf2EF838966b79cD2ba0Ea452d738",
     "roles": {
       "deployerCreatorOperator": "0xA629431b12fcf2EF838966b79cD2ba0Ea452d738",
       "executorOwner": "0xb3Fbde35DcA37D65F19f2b40BbC2e8E6Fef3956C",
       "relayer": "0x03D9bd775aE2D7757e79B9CC6B9abDaE85D27b66"
-    }
+    },
+    "redeployedAt": "2026-09-03T23:38:49.312Z"
   },
   "sepolia": {
     "network": "Ethereum Sepolia",

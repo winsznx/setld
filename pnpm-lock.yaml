@@ -25,6 +25,26 @@ importers:
         specifier: ^2.1.9
         version: 2.1.9(@types/node@22.7.5)
 
+  apps/orchestrator:
+    dependencies:
+      '@gluwa/usc-sdk':
+        specifier: 0.18.0
+        version: 0.18.0(debug@4.4.3)
+      '@setld/contract-clients':
+        specifier: workspace:*
+        version: link:../../packages/contract-clients
+      '@setld/protocol-types':
+        specifier: workspace:*
+        version: link:../../packages/protocol-types
+      '@setld/reference-model':
+        specifier: workspace:*
+        version: link:../../packages/reference-model
+      ethers:
+        specifier: ^6.15.0
+        version: 6.17.0
+
+  packages/contract-clients: {}
+
   packages/protocol-types: {}
 
   packages/reference-model:
