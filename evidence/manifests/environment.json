@@ -1,0 +1,64 @@
+{
+  "probeTimestamp": "2026-09-03T17:14:35.991Z",
+  "gate": "S0+S1",
+  "creditcoin": {
+    "rpc": "https://rpc.cc3-testnet.creditcoin.network/rpc",
+    "evmChainId": 102031,
+    "evmChainIdHex": "0x18e8f",
+    "headBlock": 5424406,
+    "blockProverPrecompile": "0x0000000000000000000000000000000000000FD2",
+    "chainInfoPrecompile": "0x0000000000000000000000000000000000000fd3",
+    "evmV1Decoder": "0x731c345d79Fb8BbDC541f9DF3b6317585F849F9f"
+  },
+  "proofBuilder": {
+    "url": "https://proof-gen-api.cc3-testnet.creditcoin.network",
+    "proofLatencyMs": 762,
+    "cached": true,
+    "generatedAt": "2026-09-03T17:14:34.616027077Z"
+  },
+  "sourceChain": {
+    "chainKey": 1,
+    "chainId": 11155111,
+    "chainName": "Sepolia ethereum",
+    "chainEncoding": 1,
+    "attestationGenesisHeight": 0,
+    "latestAttested": "{\n  \"height\": 11627910,\n  \"hash\": \"0xb64e7e671c414ea2d8a222d0e331e9ad7f4d9a82c2377097a0706a7665230f7f\",\n  \"isAttestation\": true,\n  \"exists\": true\n}"
+  },
+  "packages": {
+    "@gluwa/usc-sdk": "0.18.0",
+    "@gluwa/usc-contracts": "0.2.0"
+  },
+  "proofSample": {
+    "sepoliaTxHash": "0xd64ba21d1146816e36730fe301343e4db76b8a5a97e88d7a8e0b1cd56390080b",
+    "headerNumber": 11627510,
+    "txIndexFromProof": 2,
+    "txIndexComputedOnChain": 2,
+    "txBytesLength": 3330,
+    "verifySingleOnChain": true,
+    "verifyLatencyMs": 260
+  },
+  "requiredFieldMatrix": {
+    "sourceChainKey": 1,
+    "sourceBlockHeight": 11627510,
+    "transactionIndex": 2,
+    "txFrom": "0xE6Ad325573eB0b6f8EdC7Ee5c54d3d6179BbF687",
+    "txTo": "0xF4f194Dc199D79305ef03C796A1A449dFa57E951",
+    "txToIsNull": false,
+    "txValue": "0",
+    "functionSelector": "0xa9059cbb",
+    "calldataLength": 138,
+    "receiptStatus": 1,
+    "receiptGasUsed": "34929",
+    "logCount": 1,
+    "logs": [
+      {
+        "emitter": "0xF4f194Dc199D79305ef03C796A1A449dFa57E951",
+        "topic0": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+        "topicCount": 3,
+        "dataLength": 66
+      }
+    ]
+  },
+  "missingRequiredFields": [],
+  "sourceTxKeyFormula": "keccak256(abi.encodePacked(uint64 sourceChainKey, uint64 blockHeight, uint32 transactionIndex))"
+}
