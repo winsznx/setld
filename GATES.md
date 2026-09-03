@@ -9,9 +9,9 @@ No later phase may build on a gate that has not passed.
 | S1 | Verified field extraction (all `TreasuryRebalancePredicateV1` fields) | PASS | 2026-09-03 | `evidence/manifests/environment.json` `requiredFieldMatrix`, `missingRequiredFields: []` |
 | S2 | Replay, source identity, relayer neutrality | PARTIAL | 2026-09-03 | reference-model proves replay reject + sender binding + submitter independence; on-chain proof pending funding |
 | S3 | Router-optional seam | TODO | | |
-| S4 | Reference model | PARTIAL | 2026-09-03 | `packages/reference-model` — 14/14 core+boundary+replay+neutrality tests pass; fuzz/property + full state-machine pending |
+| S4 | Reference model | PARTIAL | 2026-09-03 | 14/14 model tests + 16/16 predicate parity (TS ref-model == Solidity `Predicate.evaluate`); settlement-economics parity + fuzz pending |
 | S5 | Baseline harness parity | TODO | | |
-| S6 | Core contracts + agent local composition | TODO | | |
+| S6 | Core contracts + agent local composition | PARTIAL | 2026-09-03 | Vault/ExecutorRegistry/Core/adapter/predicate compile; predicate differential parity PASS; settlement parity + local e2e + agent pending |
 | S7 | Economic + incentive model | TODO | | |
 | S8 | Public Attestcoin success lifecycle | BLOCKED | | needs funded Creditcoin tCTC + Sepolia ETH |
 | S9 | Public Attestcoin refusal lifecycle | BLOCKED | | needs funded wallets |
