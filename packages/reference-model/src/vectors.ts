@@ -23,7 +23,7 @@ const abi = AbiCoder.defaultAbiCoder();
 export const PARITY_ADDRESSES = {
   creator: '0x00000000000000000000000000000000000C0001',
   executorCc: '0x00000000000000000000000000000000000C0002',
-  executorSrc: '0x00000000000000000000000000000000000C0003',
+  executorSrc: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8', // anvil #1; privkey used only in Foundry parity tests
   router: '0x00000000000000000000000000000000000C0004',
   vault: '0x00000000000000000000000000000000000C0005',
   assetIn: '0x00000000000000000000000000000000000C0006',
@@ -161,13 +161,33 @@ export function parityVectors(): ParityVector[] {
     expectedFailedStep: number,
     expectedTerminal: MandateState,
     consumed: string[] = [],
-  ) => v.push({ name, klass, verifiedExecution: ve(over), consumedSourceTxKeys: consumed, expectedCode, expectedFailedStep, expectedTerminal });
+  ) => {
+    // give every vector a distinct source tx identity so the global consumed-key map in
+    // SetldCore does not collide across the per-vector mandates in the settlement parity test
+    const txIndex = v.length + 1;
+    const height = (over.blockHeight ?? 1_500) as number;
+    const chainKey = (over.sourceChainKey ?? 1) as number;
+    const merged: Partial<VerifiedExecution> = {
+      transactionIndex: txIndex,
+      sourceTxKey: deriveSourceTxKey(chainKey, height, txIndex),
+      ...over,
+    };
+    v.push({
+      name,
+      klass,
+      verifiedExecution: ve(merged),
+      consumedSourceTxKeys: consumed,
+      expectedCode,
+      expectedFailedStep,
+      expectedTerminal,
+    });
+  };
 
   add('exact-valid', 'valid', {}, EvaluationCode.FULFILLED, 0, MandateState.FULFILLED);
   add('valid-at-end-block', 'valid', { blockHeight: 2_000 }, EvaluationCode.FULFILLED, 0, MandateState.FULFILLED);
   add('before-start', 'after-deadline', { blockHeight: 999 }, EvaluationCode.BEFORE_EXECUTION_START, 2, MandateState.INVALID_ATTEMPT);
   add('after-deadline', 'after-deadline', { blockHeight: 2_001 }, EvaluationCode.AFTER_EXECUTION_DEADLINE, 3, MandateState.INVALID_ATTEMPT);
-  add('wrong-source-chain', 'wrong-param', { sourceChainKey: 3, sourceTxKey: deriveSourceTxKey(3, 1_500, 3) }, EvaluationCode.WRONG_SOURCE_CHAIN, 1, MandateState.INVALID_ATTEMPT);
+  add('wrong-source-chain', 'wrong-param', { sourceChainKey: 3 }, EvaluationCode.WRONG_SOURCE_CHAIN, 1, MandateState.INVALID_ATTEMPT);
   add('wrong-sender', 'wrong-sender', { txFrom: '0x000000000000000000000000000000000000dEaD' }, EvaluationCode.SENDER_NOT_BOUND_EXECUTOR, 4, MandateState.INVALID_ATTEMPT);
   add('wrong-target', 'wrong-param', { txTo: '0x000000000000000000000000000000000000BEEF' }, EvaluationCode.WRONG_TARGET, 5, MandateState.INVALID_ATTEMPT);
   add('wrong-mandate-binding', 'wrong-param', { calldata: calldata({ mandateId: keccak256(Buffer.from('other')) }) }, EvaluationCode.WRONG_MANDATE_BINDING, 7, MandateState.INVALID_ATTEMPT);
@@ -178,10 +198,10 @@ export function parityVectors(): ParityVector[] {
   add('event-missing', 'wrong-param', { logs: [] }, EvaluationCode.EVENT_MISSING, 14, MandateState.INVALID_ATTEMPT);
   add('event-wrong-emitter', 'wrong-param', { logs: [evLog({ emitter: '0x000000000000000000000000000000000000FEED' })] }, EvaluationCode.EVENT_WRONG_EMITTER, 15, MandateState.INVALID_ATTEMPT);
   add('event-output-below-min', 'wrong-param', { logs: [evLog({ amountOut: 1n })] }, EvaluationCode.EVENT_OUTPUT_BELOW_MIN, 17, MandateState.INVALID_ATTEMPT);
-  {
-    const dup = ve({});
-    add('replay-consumed-key', 'replay', {}, EvaluationCode.SOURCE_TX_ALREADY_CONSUMED, 17, MandateState.INVALID_ATTEMPT, [dup.sourceTxKey]);
-  }
+  add('replay-consumed-key', 'replay', {}, EvaluationCode.SOURCE_TX_ALREADY_CONSUMED, 17, MandateState.INVALID_ATTEMPT);
+  // the replay vector's "already consumed" key is its own source tx key
+  const replay = v[v.length - 1]!;
+  replay.consumedSourceTxKeys = [replay.verifiedExecution.sourceTxKey];
   return v;
 }
 

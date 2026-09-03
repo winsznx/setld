@@ -71,10 +71,7 @@ contract SetldVault {
     }
 
     /// @notice Move `amount` of a mandate's escrow to `to` immediately (push).
-    function pay(bytes32 mandateId, address asset, address to, uint256 amount, bytes32 reason)
-        external
-        onlyAuthority
-    {
+    function pay(bytes32 mandateId, address asset, address to, uint256 amount, bytes32 reason) external onlyAuthority {
         _debitEscrow(mandateId, asset, amount);
         accountedBalance[asset] -= amount;
         require(IERC20(asset).transfer(to, amount), "transfer");

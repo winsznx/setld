@@ -73,11 +73,7 @@ contract PredicateParityTest is Test {
                 })
             );
 
-            assertEq(
-                uint256(uint8(ev.code)),
-                expectedCodeIndex,
-                string.concat("code mismatch for vector: ", name)
-            );
+            assertEq(uint256(uint8(ev.code)), expectedCodeIndex, string.concat("code mismatch for vector: ", name));
             assertEq(uint256(ev.failedStep), expectedStep, string.concat("failedStep mismatch for vector: ", name));
         }
         assertGt(n, 10, "expected at least 11 parity vectors");

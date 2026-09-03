@@ -34,7 +34,9 @@ contract SetldExecutionRouter {
         uint256 amountIn,
         uint256 minAmountOut
     );
-    event MandateExecuted(bytes32 indexed mandateId, address indexed executor, address indexed target, uint256 amountOut);
+    event MandateExecuted(
+        bytes32 indexed mandateId, address indexed executor, address indexed target, uint256 amountOut
+    );
 
     error NotAdmin();
     error TargetNotAllowed(address target);
@@ -71,9 +73,8 @@ contract SetldExecutionRouter {
 
         emit MandateExecutionAttempt(mandateId, msg.sender, target, assetIn, assetOut, amountIn, minAmountOut);
 
-        amountOut = IDemoTreasuryVault(target).rebalance(
-            mandateId, msg.sender, assetIn, assetOut, amountIn, minAmountOut
-        );
+        amountOut =
+            IDemoTreasuryVault(target).rebalance(mandateId, msg.sender, assetIn, assetOut, amountIn, minAmountOut);
 
         emit MandateExecuted(mandateId, msg.sender, target, amountOut);
     }

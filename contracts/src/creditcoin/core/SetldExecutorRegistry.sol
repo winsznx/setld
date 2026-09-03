@@ -94,7 +94,9 @@ contract SetldExecutorRegistry {
         // retire the current active binding (if any) — allowed only when nothing pins it
         uint256 activeIdx = activeBindingIndex[executorId];
         if (activeIdx != 0) {
-            if (activeMandateCount[executorId] != 0) revert BindingLockedByActiveMandate(activeMandateCount[executorId]);
+            if (activeMandateCount[executorId] != 0) {
+                revert BindingLockedByActiveMandate(activeMandateCount[executorId]);
+            }
             Binding storage prev = _bindings[executorId][activeIdx - 1];
             prev.retiredAtBlock = uint64(block.number);
             boundExecutorOf[prev.sourceAddress] = bytes32(0);
@@ -123,7 +125,8 @@ contract SetldExecutorRegistry {
         Binding[] storage b = _bindings[executorId];
         for (uint256 i = b.length; i > 0; i--) {
             Binding storage entry = b[i - 1];
-            if (entry.boundAtBlock <= blockNumber && (entry.retiredAtBlock == 0 || entry.retiredAtBlock > blockNumber)) {
+            if (entry.boundAtBlock <= blockNumber && (entry.retiredAtBlock == 0 || entry.retiredAtBlock > blockNumber))
+            {
                 return entry.sourceAddress;
             }
         }

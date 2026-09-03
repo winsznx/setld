@@ -71,7 +71,9 @@ contract SetldAttestcoinAdapter {
         MerkleProof calldata merkleProof,
         ContinuityProof calldata continuityProof
     ) external view returns (VerifiedExecution memory ve) {
-        if (!chainInfo.is_height_attested(chainKey, height)) revert SourceBlockNotAttested(chainKey, height);
+        if (!chainInfo.is_height_attested(chainKey, height)) {
+            revert SourceBlockNotAttested(chainKey, height);
+        }
 
         bool ok = verifier.verify(chainKey, height, encodedTransaction, merkleProof, continuityProof);
         if (!ok) revert AttestcoinProofInvalid();

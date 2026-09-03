@@ -3,7 +3,8 @@ pragma solidity 0.8.28;
 
 import {SetldVault} from "./SetldVault.sol";
 import {SetldExecutorRegistry} from "./SetldExecutorRegistry.sol";
-import {SetldAttestcoinAdapter, VerifiedExecution} from "../adapters/SetldAttestcoinAdapter.sol";
+import {VerifiedExecution} from "../adapters/SetldAttestcoinAdapter.sol";
+import {ISetldAttestcoinAdapter} from "../adapters/ISetldAttestcoinAdapter.sol";
 import {MerkleProof, ContinuityProof} from "../adapters/IAttestcoinPrecompiles.sol";
 import {
     TreasuryRebalancePredicateV1 as Predicate,
@@ -103,8 +104,12 @@ contract SetldCore {
     error MandateNotFound();
 
     event TemplateRegistered(bytes32 indexed templateId, uint32 version, address adapter, uint64 sourceChainKey);
-    event MandateCreated(bytes32 indexed mandateId, address indexed creator, bytes32 indexed templateId, bytes32 termsHash);
-    event MandateAccepted(bytes32 indexed mandateId, address indexed executor, bytes32 executorId, address sourceSender);
+    event MandateCreated(
+        bytes32 indexed mandateId, address indexed creator, bytes32 indexed templateId, bytes32 termsHash
+    );
+    event MandateAccepted(
+        bytes32 indexed mandateId, address indexed executor, bytes32 executorId, address sourceSender
+    );
     event MandateCancelled(bytes32 indexed mandateId);
     event MandateReleased(bytes32 indexed mandateId, uint256 reservationPenalty);
     event MandateSettled(
@@ -174,9 +179,7 @@ contract SetldCore {
         if (econ.rewardAmount == 0 || econ.executorBond == 0 || econ.creatorBond == 0) revert ZeroAmount();
 
         bytes32 termsHash = keccak256(abi.encode(terms));
-        mandateId = keccak256(
-            abi.encodePacked(block.chainid, address(this), msg.sender, nonce, templateId, termsHash)
-        );
+        mandateId = keccak256(abi.encodePacked(block.chainid, address(this), msg.sender, nonce, templateId, termsHash));
         require(_mandates[mandateId].state == State.NONE, "mandate exists");
 
         _terms[mandateId] = terms;
@@ -228,7 +231,9 @@ contract SetldCore {
         if (msg.sender != m.creator) revert NotCreator();
         m.state = State.CANCELLED;
         vault.pay(mandateId, m.econ.rewardToken, m.creator, m.econ.rewardAmount, "reward-refund");
-        vault.pay(mandateId, m.econ.bondToken, m.creator, m.econ.creatorBond + m.econ.relayerBudget, "creator-bond-return");
+        vault.pay(
+            mandateId, m.econ.bondToken, m.creator, m.econ.creatorBond + m.econ.relayerBudget, "creator-bond-return"
+        );
         emit MandateCancelled(mandateId);
     }
 
@@ -244,10 +249,14 @@ contract SetldCore {
 
         if (penalty > 0) vault.pay(mandateId, m.econ.bondToken, m.creator, penalty, "reservation-penalty");
         if (m.econ.executorBond - penalty > 0) {
-            vault.pay(mandateId, m.econ.bondToken, m.acceptedExecutor, m.econ.executorBond - penalty, "executor-bond-return");
+            vault.pay(
+                mandateId, m.econ.bondToken, m.acceptedExecutor, m.econ.executorBond - penalty, "executor-bond-return"
+            );
         }
         vault.pay(mandateId, m.econ.rewardToken, m.creator, m.econ.rewardAmount, "reward-refund");
-        vault.pay(mandateId, m.econ.bondToken, m.creator, m.econ.creatorBond + m.econ.relayerBudget, "creator-bond-return");
+        vault.pay(
+            mandateId, m.econ.bondToken, m.creator, m.econ.creatorBond + m.econ.relayerBudget, "creator-bond-return"
+        );
         emit MandateReleased(mandateId, penalty);
     }
 
@@ -263,9 +272,8 @@ contract SetldCore {
         if (m.state != State.ACCEPTED) revert BadState(m.state, State.ACCEPTED);
 
         TemplateConfig memory cfg = templates[m.templateId];
-        VerifiedExecution memory ve = SetldAttestcoinAdapter(cfg.adapter).verifySingle(
-            chainKey, height, encodedTransaction, merkleProof, continuityProof
-        );
+        VerifiedExecution memory ve = ISetldAttestcoinAdapter(cfg.adapter)
+            .verifySingle(chainKey, height, encodedTransaction, merkleProof, continuityProof);
 
         if (consumedSourceTxKey[ve.sourceTxKey]) revert SourceTxAlreadyConsumed(ve.sourceTxKey);
 
@@ -300,9 +308,8 @@ contract SetldCore {
 
         _payOut(mandateId, m, terminal);
 
-        bytes32 traceHash = keccak256(
-            abi.encode(mandateId, uint8(ev.code), ev.failedStep, ev.observedAmountIn, ev.observedAmountOut)
-        );
+        bytes32 traceHash =
+            keccak256(abi.encode(mandateId, uint8(ev.code), ev.failedStep, ev.observedAmountIn, ev.observedAmountOut));
         emit MandateSettled(mandateId, terminal, uint8(ev.code), ev.failedStep, ve.sourceTxKey, traceHash);
     }
 
@@ -318,9 +325,13 @@ contract SetldCore {
         vault.pay(mandateId, m.econ.rewardToken, m.creator, m.econ.rewardAmount, "reward-refund");
         if (penalty > 0) vault.pay(mandateId, m.econ.bondToken, m.creator, penalty, "executor-bond-penalty");
         if (m.econ.executorBond - penalty > 0) {
-            vault.pay(mandateId, m.econ.bondToken, m.acceptedExecutor, m.econ.executorBond - penalty, "executor-bond-return");
+            vault.pay(
+                mandateId, m.econ.bondToken, m.acceptedExecutor, m.econ.executorBond - penalty, "executor-bond-return"
+            );
         }
-        vault.pay(mandateId, m.econ.bondToken, m.creator, m.econ.creatorBond + m.econ.relayerBudget, "creator-bond-return");
+        vault.pay(
+            mandateId, m.econ.bondToken, m.creator, m.econ.creatorBond + m.econ.relayerBudget, "creator-bond-return"
+        );
         emit MandateTimedOut(mandateId);
     }
 

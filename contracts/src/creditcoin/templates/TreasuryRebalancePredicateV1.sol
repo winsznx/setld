@@ -58,7 +58,8 @@ struct Evaluation {
 library TreasuryRebalancePredicateV1 {
     bytes32 internal constant REBALANCE_EXECUTED_SIG =
         keccak256("RebalanceExecuted(bytes32,address,address,address,uint256,uint256)");
-    bytes4 internal constant ROUTER_SELECTOR = bytes4(keccak256("execute(bytes32,address,address,address,uint256,uint256)"));
+    bytes4 internal constant ROUTER_SELECTOR =
+        bytes4(keccak256("execute(bytes32,address,address,address,uint256,uint256)"));
 
     struct Context {
         bytes32 mandateId;
@@ -92,14 +93,8 @@ library TreasuryRebalancePredicateV1 {
         // 6
         if (ve.selector != ROUTER_SELECTOR || ve.selector != t.selector) return _err(EvaluationCode.WRONG_SELECTOR, 6);
 
-        (
-            bytes32 callMandateId,
-            ,
-            address callAssetIn,
-            address callAssetOut,
-            uint256 callAmountIn,
-            uint256 callMinOut
-        ) = _decodeRouterCall(ve.txCalldata);
+        (bytes32 callMandateId,, address callAssetIn, address callAssetOut, uint256 callAmountIn, uint256 callMinOut) =
+            _decodeRouterCall(ve.txCalldata);
 
         // 7
         if (callMandateId != ctx.mandateId) return _err(EvaluationCode.WRONG_MANDATE_BINDING, 7);
@@ -130,14 +125,8 @@ library TreasuryRebalancePredicateV1 {
         // 15
         if (log.address_ != t.vault) return _err(EvaluationCode.EVENT_WRONG_EMITTER, 15);
 
-        (
-            bytes32 evMandateId,
-            address evExecutor,
-            ,
-            ,
-            uint256 evAmountIn,
-            uint256 evAmountOut
-        ) = _decodeRebalanceEvent(log);
+        (bytes32 evMandateId, address evExecutor,,, uint256 evAmountIn, uint256 evAmountOut) =
+            _decodeRebalanceEvent(log);
         evAmountIn;
 
         // 16
@@ -179,17 +168,20 @@ library TreasuryRebalancePredicateV1 {
     function _decodeRebalanceEvent(DecodedLog memory log)
         private
         pure
-        returns (bytes32 mandateId, address executor, address assetIn, address assetOut, uint256 amountIn, uint256 amountOut)
+        returns (
+            bytes32 mandateId,
+            address executor,
+            address assetIn,
+            address assetOut,
+            uint256 amountIn,
+            uint256 amountOut
+        )
     {
         (mandateId, executor, assetIn, assetOut, amountIn, amountOut) =
             abi.decode(log.data, (bytes32, address, address, address, uint256, uint256));
     }
 
-    function _findLog(DecodedLog[] memory logs, bytes32 sig)
-        private
-        pure
-        returns (bool found, DecodedLog memory out)
-    {
+    function _findLog(DecodedLog[] memory logs, bytes32 sig) private pure returns (bool found, DecodedLog memory out) {
         for (uint256 i = 0; i < logs.length; i++) {
             if (logs[i].topics.length > 0 && logs[i].topics[0] == sig) return (true, logs[i]);
         }
