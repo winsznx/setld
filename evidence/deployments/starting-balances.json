@@ -1,0 +1,28 @@
+{
+  "recordedAt": "2026-09-04T00:00:00Z",
+  "note": "On-chain verified starting balances before any setld spend. User-stated amounts were NOT trusted; these are eth_getBalance results.",
+  "creditcoin": {
+    "rpc": "https://rpc.cc3-testnet.creditcoin.network/rpc",
+    "chainId": 102543,
+    "blockAtCheck": 5425871,
+    "addresses": {
+      "CC3_DEPLOYER": { "address": "0xA629431b12fcf2EF838966b79cD2ba0Ea452d738", "wei": "10000000000000000000000", "tCTC": "10000.0" },
+      "CC3_EXECUTOR": { "address": "0xb3Fbde35DcA37D65F19f2b40BbC2e8E6Fef3956C", "wei": "0", "tCTC": "0.0" },
+      "CC3_RELAYER":  { "address": "0x03D9bd775aE2D7757e79B9CC6B9abDaE85D27b66", "wei": "0", "tCTC": "0.0" }
+    }
+  },
+  "sepolia": {
+    "rpc": "https://ethereum-sepolia-rpc.publicnode.com",
+    "chainId": 11155111,
+    "blockAtCheck": 11629700,
+    "addresses": {
+      "SEPOLIA_DEPLOYER": { "address": "0xe1DCA061c96CD8a1464416FEBF6Ee0824c24F884", "wei": "50000000000000000", "ETH": "0.05" },
+      "SEPOLIA_EXECUTOR": { "address": "0xD76455eB2015591A239ef651518d0e9BEeF4787F", "wei": "50000000000000000", "ETH": "0.05" }
+    }
+  },
+  "sufficiencyAssessment": {
+    "cc3": "SUFFICIENT — 10000 tCTC vs ~0.25 tCTC realistic full-campaign gas cost; funds CC3 executor + relayer internally",
+    "sepoliaDeployer": "SUFFICIENT for deploys (~0.005 ETH at 1.1 gwei) + rate/pool setup",
+    "sepoliaExecutor": "SUFFICIENT for S8/S9 + ~20 campaign executions (~0.003 ETH); wide campaign toward 50 may need a top-up, non-blocking"
+  }
+}
