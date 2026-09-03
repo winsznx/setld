@@ -9,3 +9,6 @@ out/
 cache/
 broadcast/**/dry-run/
 .DS_Store
+contracts/lib/
+contracts/out/
+contracts/cache/
