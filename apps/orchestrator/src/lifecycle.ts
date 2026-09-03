@@ -159,6 +159,9 @@ async function run(p: LifecycleParams) {
 
   await ensureExecutorBound();
 
+  const RESUME_ID = process.env.RESUME_MANDATE_ID;
+  const RESUME_TX = process.env.RESUME_EXEC_TX;
+
   // 1. create mandate
   const sepHead = await sepolia.getBlockNumber();
   const cc3Head = await cc3.getBlockNumber();
@@ -186,59 +189,62 @@ async function run(p: LifecycleParams) {
   const acceptanceDeadline = Math.floor(Date.now() / 1000) + 3600;
   const salt = BigInt(Date.now());
 
-  if ((await token.allowance(creator.address, C.SetldVault)) < p.rewardAmount + p.creatorBond + p.relayerBudget) {
-    await (await token.approve(C.SetldVault, MAX_UINT)).wait();
-  }
-  const createTx = await core.createMandate(
-    TEMPLATE_ID,
-    1,
-    terms,
-    econ,
-    acceptanceDeadline,
-    execStart,
-    execEnd,
-    proofDeadline,
-    keccak256(toUtf8Bytes(p.label)),
-    salt,
-  );
-  const createRc = await createTx.wait();
-  const createdEv = createRc!.logs.find(
-    (l: unknown): l is EventLog => l instanceof EventLog && (l as EventLog).eventName === 'MandateCreated',
-  );
-  const mandateId: string = createdEv!.args[0];
-  console.log(`  mandate ${mandateId}  (createTx ${createTx.hash})`);
+  let mandateId: string;
+  let createHash: string | null = null;
+  let acceptHash: string | null = null;
+  let execHash: string;
+  let sourceBlock: number;
+  let execStatus: number;
 
-  // 2. accept + bond
-  const tokenExec = token.connect(executor) as Contract;
-  if ((await tokenExec.allowance(executor.address, C.SetldVault)) < p.executorBond) {
-    await (await tokenExec.approve(C.SetldVault, MAX_UINT)).wait();
-  }
-  const acceptTx = await (core.connect(executor) as Contract).acceptMandate(mandateId);
-  await acceptTx.wait();
-  console.log(`  accepted + bonded (acceptTx ${acceptTx.hash})`);
+  if (RESUME_ID && RESUME_TX) {
+    mandateId = RESUME_ID;
+    execHash = RESUME_TX;
+    const rc = await sepolia.getTransactionReceipt(execHash);
+    if (!rc) throw new Error(`resume: no receipt for ${execHash}`);
+    sourceBlock = rc.blockNumber;
+    execStatus = rc.status ?? 0;
+    console.log(`  resume mandate ${mandateId}  execTx ${execHash} block ${sourceBlock} status ${execStatus}`);
+  } else {
+    if ((await token.allowance(creator.address, C.SetldVault)) < p.rewardAmount + p.creatorBond + p.relayerBudget) {
+      await (await token.approve(C.SetldVault, MAX_UINT)).wait();
+    }
+    const createTx = await core.createMandate(
+      TEMPLATE_ID, 1, terms, econ, acceptanceDeadline, execStart, execEnd, proofDeadline, keccak256(toUtf8Bytes(p.label)), salt,
+    );
+    const createRc = await createTx.wait();
+    const createdEv = createRc!.logs.find(
+      (l: unknown): l is EventLog => l instanceof EventLog && (l as EventLog).eventName === 'MandateCreated',
+    );
+    mandateId = createdEv!.args[0];
+    createHash = createTx.hash;
+    console.log(`  mandate ${mandateId}  (createTx ${createTx.hash})`);
 
-  // 3. execute on Sepolia
-  const execTx = await router.execute(
-    mandateId,
-    S.DemoTreasuryVault,
-    S.assetIn,
-    S.assetOut,
-    p.execAmountIn,
-    p.execMinOut,
-  );
-  const execRc = await execTx.wait();
-  const sourceBlock = execRc!.blockNumber;
-  console.log(
-    `  Sepolia execute tx ${execTx.hash}  block ${sourceBlock}  status ${execRc!.status}  ` +
-      `${deployments.sepolia.explorer}/tx/${execTx.hash}`,
-  );
+    const tokenExec = token.connect(executor) as Contract;
+    if ((await tokenExec.allowance(executor.address, C.SetldVault)) < p.executorBond) {
+      await (await tokenExec.approve(C.SetldVault, MAX_UINT)).wait();
+    }
+    const acceptTx = await (core.connect(executor) as Contract).acceptMandate(mandateId);
+    await acceptTx.wait();
+    acceptHash = acceptTx.hash;
+    console.log(`  accepted + bonded (acceptTx ${acceptTx.hash})`);
+
+    const execTx = await router.execute(mandateId, S.DemoTreasuryVault, S.assetIn, S.assetOut, p.execAmountIn, p.execMinOut);
+    const execRc = await execTx.wait();
+    execHash = execTx.hash;
+    sourceBlock = execRc!.blockNumber;
+    execStatus = execRc!.status ?? 0;
+    console.log(
+      `  Sepolia execute tx ${execTx.hash}  block ${sourceBlock}  status ${execStatus}  ` +
+        `${deployments.sepolia.explorer}/tx/${execTx.hash}`,
+    );
+  }
 
   // 4. Attestcoin proof
   const ci = new chainInfo.PrecompileChainInfoProvider(cc3 as never);
   console.log(`  waiting for Attestcoin to attest Sepolia block ${sourceBlock} ...`);
-  await ci.waitUntilHeightAttested(SOURCE_CHAIN_KEY, sourceBlock, 5000, 600_000);
+  await ci.waitUntilHeightAttested(SOURCE_CHAIN_KEY, sourceBlock, 8000, 3_600_000);
   const pb = new proofProvider.service.ProofBuilder(SOURCE_CHAIN_KEY, PROOF_BUILDER);
-  const pr = await pb.getProof(execTx.hash);
+  const pr = await pb.getProof(execHash);
   if (!pr.success || !pr.data) throw new Error(`proof failed: ${pr.error}`);
   const proof = pr.data;
   console.log(`  proof ready: header ${proof.headerNumber} txIndex ${proof.txIndex} cached ${proof.cached}`);
@@ -353,16 +359,16 @@ async function run(p: LifecycleParams) {
     mandateId,
     params: j(p),
     transactions: {
-      createMandate: createTx.hash,
-      acceptAndBond: acceptTx.hash,
-      sepoliaExecute: execTx.hash,
-      sepoliaExecuteExplorer: `${deployments.sepolia.explorer}/tx/${execTx.hash}`,
+      createMandate: createHash,
+      acceptAndBond: acceptHash,
+      sepoliaExecute: execHash,
+      sepoliaExecuteExplorer: `${deployments.sepolia.explorer}/tx/${execHash}`,
       settle: settleTx?.hash ?? null,
     },
     sourceExecution: {
       block: sourceBlock,
-      receiptStatus: execRc!.status,
-      note: execRc!.status === 1 ? 'Ethereum transaction SUCCEEDED' : 'Ethereum transaction REVERTED',
+      receiptStatus: execStatus,
+      note: execStatus === 1 ? 'Ethereum transaction SUCCEEDED' : 'Ethereum transaction REVERTED',
     },
     attestcoinProof: {
       chainKey: proof.chainKey,
