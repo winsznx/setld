@@ -13,7 +13,7 @@ No later phase may build on a gate that has not passed.
 | S5 | Baseline harness parity | TODO | | |
 | S6 | Core contracts + agent local composition | PARTIAL | 2026-09-03 | full 3-layer differential parity PASS (ref-model / Solidity predicate / SetldCore economics); local e2e lifecycle + agent + Slither pending |
 | S7 | Economic + incentive model | TODO | | |
-| S8 | Public Attestcoin success lifecycle | BLOCKED | | needs funded Creditcoin tCTC + Sepolia ETH |
+| S8 | Public Attestcoin success lifecycle | PASS | 2026-09-04 | mandate 0x2e69eac5, Sepolia exec 0x7a758701 (blk 11629791 status 1), proof txIndex 111, settle 0x6ee3bf87 -> FULFILLED; ref-model agreed; relayer != executor (neutrality). evidence/completed-mandates/canonical-correct.json |
 | S9 | Public Attestcoin refusal lifecycle | BLOCKED | | needs funded wallets |
 | S10 | Sponsor-removal / reporter-compromise ablation | TODO | | |
 | S11 | Wide-proof campaign | BLOCKED | | needs funded wallets |
