@@ -34,3 +34,23 @@ network-switch UX use this value. Never copy a chain ID from a tutorial (PRD 2.2
 
 `@gluwa/usc-sdk@0.18.0` deps: `ethers@^6.15`, `axios`, `dotenv`, `exponential-backoff`.
 Repo standardizes on ethers v6 (PRD 18.1 allows viem OR ethers; SDK forces ethers).
+
+## D6 — Deployed-component set: 6 on-chain units, each with a distinct boundary (2026-09-03)
+
+The PRD names ~10 Creditcoin modules (13.1–13.8). Deploying each separately would add
+cross-contract call surface and reentrancy paths without adding a trust, security, or
+economic boundary. Applying the rule "every separately deployed component must justify its
+own boundary", the deployed set is:
+
+| Unit | Boundary it owns | Why not merged |
+|---|---|---|
+| `SetldVault` | value custody | must have no arbitrary-withdraw path; only the settlement authority may move funds; isolating it bounds the blast radius of any core bug |
+| `SetldAttestcoinAdapter` | Attestcoin protocol-version compatibility (PRD 13.3) | "replaceable only by deploying a new adapter version"; active mandates pin their adapter |
+| `SetldExecutorRegistry` | executor identity + source-address binding | EIP-712 binding/rotation is self-contained, read by many parties, and is the identity other protocols would integrate against (PRD 12.1, ERC-8004 path) |
+| `SetldCore` | mandate lifecycle + template config + settlement + fee params | registry, template-registry, settlement-engine and fee-controller all mutate or read the **same** mandate state and PRD 15.1 requires source-tx consumption and terminal-state update to be **atomic**. Splitting them forces external calls mid-settlement. Collapsed; capabilities preserved as internal functions with the PRD's intended access control (template registration = operator-gated, fee params = immutable at deploy for v1 per PRD 16.6/13.8). |
+| `TreasuryRebalancePredicateV1` | pure predicate logic (PRD 13.5) | deployed as a linked library; no state, no admin, reused by reference-model parity tests |
+| `BaselineReporterSettlement` (B0) | the reporter-trust counterfactual (PRD 4A.2) | MUST be isolated from setld's verifier path so the ablation is honest |
+
+Capabilities the PRD assigned to now-internal modules are all retained. If a future
+template needs an independent template registry (e.g. third-party template authors), it can
+be extracted without touching settled mandates. Evidence: this file + `contracts/src/creditcoin/core`.
