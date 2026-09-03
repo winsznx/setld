@@ -24,8 +24,11 @@ contract DemoTreasuryVault {
 
     address public immutable admin;
 
+    /// @dev All fields non-indexed: the setld predicate and reference model decode the full
+    ///      tuple out of `log.data` uniformly. Off-chain workers still filter by emitter +
+    ///      topic0.
     event RebalanceExecuted(
-        bytes32 indexed mandateId,
+        bytes32 mandateId,
         address executor,
         address assetIn,
         address assetOut,

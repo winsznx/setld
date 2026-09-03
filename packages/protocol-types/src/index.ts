@@ -8,7 +8,7 @@
  * S0/S1 evidence in `evidence/manifests/environment.json`.
  */
 
-export const CREDITCOIN_CC3_CHAIN_ID = 102543; // D4: live-discovered, 0x18e8f
+export const CREDITCOIN_CC3_CHAIN_ID = 102031; // D4: live-discovered, 0x18e8f
 export const SEPOLIA_CHAIN_KEY = 1; // S0: get_supported_chains()
 export const ETHEREUM_CHAIN_KEY = 3;
 export const EVM_V1_DECODER_CC3 = '0x731c345d79Fb8BbDC541f9DF3b6317585F849F9f';

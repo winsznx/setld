@@ -25,7 +25,7 @@ intent; simpler than PRD 17.x implied.
 from an unauthenticated client. Relayer/worker liveness design does not need a secret for
 proof acquisition on testnet. Revisit for mainnet.
 
-## D4 — Creditcoin CC3 testnet EVM chain ID = 102543 (0x18e8f) (2026-09-03)
+## D4 — Creditcoin CC3 testnet EVM chain ID = 102031 (0x18e8f) (2026-09-03)
 
 Pinned from live `eth_chainId`. All EIP-712 domains, binding messages, and wallet
 network-switch UX use this value. Never copy a chain ID from a tutorial (PRD 2.2).
@@ -54,3 +54,15 @@ own boundary", the deployed set is:
 Capabilities the PRD assigned to now-internal modules are all retained. If a future
 template needs an independent template registry (e.g. third-party template authors), it can
 be extracted without touching settled mandates. Evidence: this file + `contracts/src/creditcoin/core`.
+
+## D7 — CC3 EVM chain id is 102031 (0x18e8f), and CC3 RPC omits `mixHash` (2026-09-04)
+
+Earlier records said 102543 — a hex-conversion error of `0x18e8f`. Corrected everywhere.
+The contracts were never affected (they use `block.chainid` at runtime).
+
+Also: the CC3 RPC returns block JSON without `mixHash`/`prevrandao`, which breaks
+foundry/alloy block polling ("missing field `mixHash`", "prevrandao not set"). Consequences:
+- CC3 contracts are compiled with `evm_version = london` (pre-PUSH0, no prevrandao opcode).
+- CC3 deployment + lifecycle txs are driven by an ethers-based orchestrator
+  (`scripts/`), not `forge script`. Sepolia still uses `forge script`.
+- `forge test` (local EVM) is unaffected and remains the contract test path.

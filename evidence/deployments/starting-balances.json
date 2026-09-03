@@ -3,7 +3,7 @@
   "note": "On-chain verified starting balances before any setld spend. User-stated amounts were NOT trusted; these are eth_getBalance results.",
   "creditcoin": {
     "rpc": "https://rpc.cc3-testnet.creditcoin.network/rpc",
-    "chainId": 102543,
+    "chainId": 102031,
     "blockAtCheck": 5425871,
     "addresses": {
       "CC3_DEPLOYER": { "address": "0xA629431b12fcf2EF838966b79cD2ba0Ea452d738", "wei": "10000000000000000000000", "tCTC": "10000.0" },

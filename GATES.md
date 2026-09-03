@@ -27,7 +27,7 @@ No later phase may build on a gate that has not passed.
 Executable probe `scripts/probe-attestcoin.ts` against live CC3 testnet:
 
 - Creditcoin CC3 testnet RPC: `https://rpc.cc3-testnet.creditcoin.network/rpc`
-- Creditcoin EVM chain ID: **102543** (`0x18e8f`)
+- Creditcoin EVM chain ID: **102031** (`0x18e8f`)
 - BlockProver precompile: `0x0000000000000000000000000000000000000FD2` (native, `eth_getCode` empty as expected)
 - ChainInfo precompile: `0x0000000000000000000000000000000000000fd3`
 - EvmV1Decoder library (deployed): `0x731c345d79Fb8BbDC541f9DF3b6317585F849F9f`
