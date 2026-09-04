@@ -1,0 +1,114 @@
+{
+  "note": "Every consequential setld claim with its status and evidence. status ∈ target|verified|failed|unavailable|withdrawn. A withdrawn claim must not appear in README/UI/deck/demo.",
+  "generatedAt": "2026-09-04",
+  "claims": [
+    {
+      "claimId": "setld-s0-s1",
+      "wording": "The current Attestcoin native-verifier path exposes every field TreasuryRebalancePredicateV1 needs — sender, target, selector, calldata, receipt status, log emitter, topics, event data — for a real Sepolia transaction, verified on Creditcoin CC3.",
+      "status": "verified",
+      "proofLevel": 9,
+      "evidence": ["evidence/manifests/environment.json", "scripts/probe-attestcoin.ts"],
+      "verificationCommand": "pnpm probe:attestcoin",
+      "measured": { "missingRequiredFields": 0 },
+      "limitations": []
+    },
+    {
+      "claimId": "setld-s8-correct",
+      "wording": "A real Sepolia execution that satisfies every committed condition released the reward on Creditcoin through the Attestcoin proof path.",
+      "status": "verified",
+      "proofLevel": 9,
+      "sourceNetwork": "Sepolia",
+      "executionNetwork": "Creditcoin CC3 testnet",
+      "sourceTx": "0x7a75870118074921debc68321ee969e3bb4b08850f638982954f5c448f0bb6d3",
+      "creditcoinTx": "0x6ee3bf874102a2e1b15d0dca667bbe4038aeb08179b6ebc410465eddc1f99451",
+      "evidence": ["evidence/completed-mandates/canonical-correct.json"],
+      "verificationCommand": "pnpm verify:mandate --id 0x2e69eac5b98a7192868083b62ad5d756aa917a019ac0c0a701b117e3a43094c7",
+      "numerator": 1,
+      "denominator": 1,
+      "note": "re-running against nonReentrant-hardened contracts; new hashes will replace these"
+    },
+    {
+      "claimId": "setld-s9-verified-but-wrong",
+      "wording": "A Sepolia transaction that SUCCEEDED on Ethereum (receipt status 1) but exceeded the committed amount cap was Attestcoin-verified and then refused by setld as INVALID_ATTEMPT, with the reward refunded and a 100% executor bond penalty.",
+      "status": "verified",
+      "proofLevel": 9,
+      "sourceTx": "0x5e39e355f10dc74df3abdac923e8b8cf0592b8a5586b478e634f3438bdfd20e8",
+      "creditcoinTx": "0x8bca31f60ad92bb676f5efc0b8ab0f62d4a8a5611f00704ee62357ad6ccd3037",
+      "evidence": ["evidence/completed-mandates/canonical-wrong-cap.json"],
+      "verificationCommand": "pnpm verify:mandate --id 0x507b1d27d27cc9121a7f1af24bb364efbde7c49d6856ec0fef91f354b6f9950d",
+      "numerator": 1,
+      "denominator": 1,
+      "note": "re-running against hardened contracts"
+    },
+    {
+      "claimId": "setld-s2-replay-neutrality",
+      "wording": "Re-submitting a consumed proof against a fresh accepted mandate reverts SourceTxAlreadyConsumed; the proof submitter (a distinct relayer address) earns only a fixed reimbursement and never the reward.",
+      "status": "verified",
+      "proofLevel": 9,
+      "evidence": ["evidence/negative/replay-and-neutrality.json"],
+      "verificationCommand": "pnpm tsx apps/orchestrator/src/prove-replay-neutrality.ts",
+      "note": "re-running against hardened contracts"
+    },
+    {
+      "claimId": "setld-s5-honest-parity",
+      "wording": "Under an honest reporter, the trusted-reporter baseline (B0) and setld (T0) agree on every real execution.",
+      "status": "verified",
+      "proofLevel": 8,
+      "evidence": ["evidence/campaigns/ablations/reporter-compromise.json"],
+      "measured": { "disagreements": 0, "cases": 2 }
+    },
+    {
+      "claimId": "setld-s10-sponsor-removal",
+      "wording": "A compromised trusted reporter leaked the full reward for an over-cap execution through the baseline; setld refused the identical execution with the same predicate and inputs. invalid_reward_leakage: baseline 10 tSETLD, setld 0.",
+      "status": "verified",
+      "proofLevel": 8,
+      "evidence": ["evidence/campaigns/ablations/reporter-compromise.json"],
+      "measured": { "invalid_reward_leakage_baseline_wei": "10000000000000000000", "invalid_reward_leakage_setld_wei": "0" },
+      "limitations": ["2 matched real executions; demonstrates the mechanism, not a large-sample study"]
+    },
+    {
+      "claimId": "setld-s4-differential-parity",
+      "wording": "The TS reference model, the Solidity predicate, and SetldCore settlement economics agree on classification and per-recipient transfers for all 16 canonical vectors, and the predicate passes 5 fuzz properties.",
+      "status": "verified",
+      "proofLevel": 9,
+      "evidence": ["evidence/parity/vectors.json", "contracts/test/creditcoin/PredicateParity.t.sol", "contracts/test/creditcoin/SettlementParity.t.sol", "contracts/test/creditcoin/PredicateFuzz.t.sol"],
+      "verificationCommand": "cd contracts && forge test"
+    },
+    {
+      "claimId": "setld-s11-deterministic-100",
+      "wording": "A frozen 100-case campaign across 6 cohorts through the real SetldCore settlement path: 40/40 valid fulfilled, 60/60 invalid refused, invalid_reward_leakage = 0.",
+      "status": "verified",
+      "proofLevel": 8,
+      "evidence": ["evidence/campaigns/deterministic-100/summary.json", "evidence/campaigns/deterministic-100/manifest.md"],
+      "verificationCommand": "cd contracts && forge test --match-contract DeterministicCampaignTest"
+    },
+    {
+      "claimId": "setld-ai-agent",
+      "wording": "An autonomous agent made a genuine model-driven ACCEPT (followed by an on-chain bond + Sepolia execution) and a genuine model-driven ABSTAIN on economics, with deterministic guardrails gating every decision and the model unable to mark success or choose payout.",
+      "status": "verified",
+      "proofLevel": 7,
+      "evidence": ["evidence/agent/decision-log.json", "evidence/agent/README.md"],
+      "model": "claude-sonnet-5"
+    },
+    {
+      "claimId": "setld-broad-generality",
+      "wording": "setld provides receipt-verified execution assurance for arbitrary Ethereum tasks.",
+      "status": "withdrawn",
+      "reason": "One production template (treasury rebalance) passes end to end. Public claims are narrowed to treasury execution assurance until >=3 independent action shapes pass (PRD 4A.7).",
+      "supersededBy": "setld-treasury-assurance"
+    },
+    {
+      "claimId": "setld-treasury-assurance",
+      "wording": "setld provides receipt-verified execution assurance for a treasury-rebalance mandate: the committed target, asset pair, amount cap, minimum output, deadline window and success event are all verified against an Attestcoin proof before value moves.",
+      "status": "verified",
+      "proofLevel": 9,
+      "evidence": ["evidence/completed-mandates/", "evidence/campaigns/deterministic-100/summary.json"]
+    },
+    {
+      "claimId": "setld-s12-full-lifecycle",
+      "wording": "A fresh non-technical creator and executor can complete the full wallet-based onboarding and mandate lifecycle through the web product without docs.",
+      "status": "target",
+      "note": "The wallet-free judge-verifier surface is live (setld.pages.dev). Wallet-based creator/executor onboarding UI + Playwright clean-room tests are not built. Gate S12 remains PARTIAL."
+    }
+  ]
+}
