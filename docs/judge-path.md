@@ -38,6 +38,10 @@ No wallet, no local setup, no repository search.
 7. `evidence/campaigns/ablations/reporter-compromise.json` — the sponsor-removal experiment.
 8. `apps/agent/src/` + `evidence/agent/decision-log.json` — the autonomous ACCEPT/ABSTAIN
    loop with a real model call and deterministic guardrails.
+9. `apps/web/app/app/` — the wallet-based creator and executor lifecycle
+   (`/app/create` -> `/app/execution`), the same on-chain calls the S8/S9 evidence used.
+   `apps/web/e2e/` — Playwright fresh-browser coverage (render + wallet connect + browser
+   verify PASS on the live deployment).
 
 ---
 
