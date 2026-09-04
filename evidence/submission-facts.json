@@ -122,8 +122,8 @@
   "ci": {
     "provider": "GitHub Actions",
     "status": "green",
-    "run": "https://github.com/winsznx/setld/actions/runs/33867575470",
-    "commit": "d41c13b",
+    "run": "https://github.com/winsznx/setld/actions/runs/e07a9d7",
+    "commit": "e07a9d7",
     "jobs": [
       "contracts",
       "slither",
