@@ -1,0 +1,15 @@
+[
+  {
+    "label": "wide-valid-1788521091310",
+    "mandateId": "0x9fccccec53b4852ebc1ed73eb5d5df294460833c49ebb602db07603d8e48e7f0",
+    "match": "PASS",
+    "terminal": "FULFILLED",
+    "code": "FULFILLED",
+    "sepoliaExecute": "0xf21770658ca3bb8fbb6f23053161f97567a6fb8637bc2a3015ed48c0bf2c0463",
+    "settleTx": "0x956512c77c39d10be4a3d3548d23adb5a917f05e44f0c5da7509dedd691a0c11",
+    "settleGasUsed": 672518,
+    "sourceToSettlementSeconds": 546,
+    "attestcoinProofHeader": 11633147,
+    "recordedAt": "2026-09-04T11:34:35.260Z"
+  }
+]

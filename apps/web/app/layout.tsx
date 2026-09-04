@@ -20,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className="site">
           <a href="/" className="brand">setld</a>
           <nav>
+            <a href="/app/">App</a>
             <a href="/proof">Live proof</a>
             <a href="/verify">Verify</a>
             <a href="https://github.com/winsznx/setld" target="_blank" rel="noreferrer">GitHub</a>

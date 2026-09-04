@@ -1,0 +1,22 @@
+{
+  "updatedAt": "2026-09-04T11:34:35.264Z",
+  "gate": "S11 (wide half) + S13",
+  "totalRealLifecycles": 1,
+  "perClass": {
+    "wide-valid": {
+      "count": 1,
+      "match": 1
+    }
+  },
+  "settleGasUsed": {
+    "n": 1,
+    "p50": 672518,
+    "p95": 672518
+  },
+  "sourceToSettlementSeconds": {
+    "n": 1,
+    "p50": 546,
+    "p95": 546
+  },
+  "note": "Every row is an independent Sepolia transaction with its own Attestcoin proof and Creditcoin settlement. The 100-case deterministic campaign (evidence/campaigns/deterministic-100) is separate and is NOT counted as public-testnet breadth."
+}

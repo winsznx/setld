@@ -11,3 +11,6 @@ broadcast/**/dry-run/
 .DS_Store
 contracts/out/
 contracts/cache/
+apps/web/test-results/
+evidence/fresh-user/playwright-report/
+apps/web/playwright-report/
