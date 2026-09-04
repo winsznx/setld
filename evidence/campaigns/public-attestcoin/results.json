@@ -11,5 +11,67 @@
     "sourceToSettlementSeconds": 546,
     "attestcoinProofHeader": 11633147,
     "recordedAt": "2026-09-04T11:34:35.260Z"
+  },
+  {
+    "label": "wide-over-cap-1788521091311",
+    "mandateId": "0xbe77461c5bd3655e235d5dfa72f7c9b11c97d84cc258f8ffad188fe608f2d6e3",
+    "match": "PASS",
+    "terminal": "INVALID_ATTEMPT",
+    "code": "AMOUNT_IN_OVER_CAP",
+    "sepoliaExecute": "0x3dccd67bc31392104537f1e4ea50d33f38fd0105f78230650b7fbad3a4c104a6",
+    "settleTx": "0xdd6ff6c3fc270802a2c4db5f1ac483150e13e744e61f7ea1a02f89569cdbe00b",
+    "settleGasUsed": 662298,
+    "sourceToSettlementSeconds": 468,
+    "attestcoinProofHeader": 11633190,
+    "recordedAt": "2026-09-04T11:43:03.309Z"
+  },
+  {
+    "label": "wide-low-minout-1788521091312",
+    "mandateId": "0x211ba03176f0fe178df475eee9b451f15a1be38c7d5049100ef8b5d77a39f78c",
+    "match": "PASS",
+    "terminal": "INVALID_ATTEMPT",
+    "code": "MIN_OUT_BELOW_FLOOR",
+    "sepoliaExecute": "0x7b4cd3a95295b1bbed5c4c4c1500ab92657dc124027f4173a8a50d42624914c0",
+    "settleTx": "0x422b6c327decbd189b7e72c498cff8eca870704b3bab48306893cf4293f0f06f",
+    "settleGasUsed": 665882,
+    "sourceToSettlementSeconds": 567,
+    "attestcoinProofHeader": 11633232,
+    "recordedAt": "2026-09-04T11:53:22.368Z"
+  },
+  {
+    "label": "wide-valid-1788521091313",
+    "match": "ERROR",
+    "error": "Error calling contract method: Error: getaddrinfo ENOTFOUND rpc.cc3-testnet.creditcoin.network",
+    "recordedAt": "2026-09-04T12:02:52.881Z"
+  },
+  {
+    "label": "wide-over-cap-1788521091314",
+    "match": "ERROR",
+    "error": "getaddrinfo ENOTFOUND rpc.cc3-testnet.creditcoin.network",
+    "recordedAt": "2026-09-04T12:02:52.913Z"
+  },
+  {
+    "label": "wide-low-minout-1788521091315",
+    "match": "ERROR",
+    "error": "getaddrinfo ENOTFOUND rpc.cc3-testnet.creditcoin.network",
+    "recordedAt": "2026-09-04T12:02:52.934Z"
+  },
+  {
+    "label": "wide-valid-1788521091316",
+    "match": "ERROR",
+    "error": "getaddrinfo ENOTFOUND rpc.cc3-testnet.creditcoin.network",
+    "recordedAt": "2026-09-04T12:02:52.954Z"
+  },
+  {
+    "label": "wide-over-cap-1788521091317",
+    "match": "ERROR",
+    "error": "getaddrinfo ENOTFOUND rpc.cc3-testnet.creditcoin.network",
+    "recordedAt": "2026-09-04T12:02:52.974Z"
+  },
+  {
+    "label": "wide-low-minout-1788521091318",
+    "match": "ERROR",
+    "error": "getaddrinfo ENOTFOUND rpc.cc3-testnet.creditcoin.network",
+    "recordedAt": "2026-09-04T12:02:52.998Z"
   }
 ]
