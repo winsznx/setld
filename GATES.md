@@ -18,7 +18,7 @@ No later phase may build on a gate that has not passed.
 | S10 | Sponsor-removal / reporter-compromise ablation | PASS | 2026-09-04 | compromised reporter asserted FULFILLED for the S9 over-cap execution -> B0 paid 10 tSETLD reward (invalid_reward_leakage). setld T0 refused the identical execution on-chain (0 leakage). |
 | S11 | Wide-proof campaign | PARTIAL | 2026-09-04 | deterministic 100-case campaign PASS: 40/40 valid fulfilled, 60/60 invalid refused, invalid_reward_leakage=0 (evidence/campaigns/deterministic-100/). Real public Attestcoin proofs: 2 canonical (S8/S9) re-running vs hardened contracts; wider set in progress. |
 | S12 | Product lifecycle + fresh-user proof | PARTIAL | 2026-09-04 | public judge surface LIVE at https://setld.pages.dev (landing + /proof diptych + /verify browser-side recompute + /mandates/[id]), built to design.md, Cloudflare Pages. Agent loop evidence/agent/. Wallet-based creator/executor onboarding UI + Playwright fresh-user tests still pending. |
-| S13 | Production-path evidence | TODO | | |
+| S13 | Production-path evidence | PARTIAL | 2026-09-04 | settle gas ~660-672k (verify() precompile + decode + 17-step predicate + vault transfers, one tx); source->settlement ~486-615s on-chain. n=2, evidence/campaigns/production-path.json. Concurrency/restart-recovery + larger n pending. |
 | S14 | Open-source residue | PARTIAL | 2026-09-04 | CONTRIBUTIONS.md: 4 reproducible upstream opportunities (C1 CC3 mixHash breaks foundry, C2 SDK ChainInfoProvider gaps, C3 docs receipt-envelope, C4 replay-key helper). PRs not filed without maintainer go-ahead. |
 | S15 | Submission integrity + judge path | TODO | | |
 

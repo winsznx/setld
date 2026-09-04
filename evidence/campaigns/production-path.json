@@ -1,0 +1,48 @@
+{
+  "recordedAt": "2026-09-04T09:49:35.186Z",
+  "gate": "S13",
+  "n": 2,
+  "settleGasUsed": {
+    "p50": 672252,
+    "p95": 672252,
+    "min": 660688,
+    "max": 672252
+  },
+  "sourceToSettlementSeconds": {
+    "p50": 615,
+    "p95": 615,
+    "min": 486,
+    "max": 615
+  },
+  "note": "settle gas = verify() precompile + EvmV1Decoder decode + 17-step predicate + vault transfers, in one Creditcoin transaction. Latency dominated by CC3<->Sepolia attestation throughput during the build (~5 blocks/min).",
+  "rows": [
+    {
+      "label": "canonical-correct",
+      "settleGasUsed": 672252,
+      "settleTx": "0x6ee3bf874102a2e1b15d0dca667bbe4038aeb08179b6ebc410465eddc1f99451",
+      "sourceBlockTime": 1788478860,
+      "settlementBlockTime": 1788479475,
+      "sourceToSettlementSeconds": 615,
+      "proofGeneratedAt": "2026-09-03T23:51:11.331773519Z",
+      "terminal": "FULFILLED"
+    },
+    {
+      "label": "canonical-wrong-cap",
+      "settleGasUsed": 660688,
+      "settleTx": "0x8bca31f60ad92bb676f5efc0b8ab0f62d4a8a5611f00704ee62357ad6ccd3037",
+      "sourceBlockTime": 1788479604,
+      "settlementBlockTime": 1788480090,
+      "sourceToSettlementSeconds": 486,
+      "proofGeneratedAt": "2026-09-04T00:01:25.301052957Z",
+      "terminal": "INVALID_ATTEMPT"
+    }
+  ],
+  "contracts": {
+    "SetldCore": "0x975c043bFdD755B2365489E308C17f26e762DEF4",
+    "SetldVault": "0x3ce979E2C5187BaDC97a95bc7deE941A821FF4DF",
+    "SetldExecutorRegistry": "0x035065Bc14116077e253fe6598E867bae522d10D",
+    "SetldAttestcoinAdapter": "0x3AD1325E131c2FF24fe4c5a55cC6D675dF2566c5",
+    "tSETLD": "0x0D73B33A01a9Dcb076Cd401EA27dF8310c9dDA02",
+    "BaselineReporterSettlement": "0x34A8CFb02169D92a86ECF45394167C8369C8DC69"
+  }
+}
