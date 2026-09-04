@@ -8,9 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with: { submodules: recursive }
       - uses: foundry-rs/foundry-toolchain@v1
-      - name: install forge-std
-        run: cd contracts && forge install foundry-rs/forge-std@v1.16.2 --no-git
       - name: forge build
         run: cd contracts && forge build
       - name: forge test
@@ -20,8 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with: { submodules: recursive }
       - uses: foundry-rs/foundry-toolchain@v1
-      - run: cd contracts && forge install foundry-rs/forge-std@v1.16.2 --no-git && forge build
+      - run: cd contracts && forge build
       - uses: crytic/slither-action@v0.4.0
         continue-on-error: true
         with:
@@ -56,3 +56,9 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('evidence/claims.json'))"
           node -e "JSON.parse(require('fs').readFileSync('evidence/parity/vectors.json'))"
           test -f GATES.md && test -f DECISIONS.md && test -f design.md && test -f WHITEPAPER.md
+      - name: no stale chain id
+        run: |
+          if grep -rn "102543" --include="*.ts" --include="*.tsx" --include="*.sol" --include="*.md" --include="*.json" . \
+             | grep -v node_modules | grep -v "contracts/lib/" | grep -v "DECISIONS.md"; then
+            echo "stale chain id 102543 found"; exit 1
+          fi
