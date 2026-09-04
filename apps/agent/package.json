@@ -1,0 +1,11 @@
+{
+  "name": "@setld/agent",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "bin": { "setld-agent": "./src/cli.ts" },
+  "dependencies": {
+    "@setld/orchestrator": "workspace:*",
+    "ethers": "^6.15.0"
+  }
+}

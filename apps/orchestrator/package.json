@@ -3,12 +3,18 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
-  "bin": { "setld-lifecycle": "./src/cli.ts" },
+  "bin": {
+    "setld-lifecycle": "./src/cli.ts"
+  },
   "dependencies": {
     "@gluwa/usc-sdk": "0.18.0",
     "@setld/contract-clients": "workspace:*",
     "@setld/protocol-types": "workspace:*",
     "@setld/reference-model": "workspace:*",
     "ethers": "^6.15.0"
+  },
+  "exports": {
+    ".": "./src/lifecycle.ts",
+    "./env": "./src/env.ts"
   }
 }

@@ -56,7 +56,9 @@ export async function runLoop(): Promise<void> {
 
   const outcomes: { mandateId: string; decision: string; rationale: string; finalState?: string }[] = [];
 
+  try {
   for (const ev of created) {
+   try {
     const mandateId: string = (ev as { args: string[] }).args[0]!;
     const m = await core.getMandate(mandateId).catch(() => null);
     if (!m || STATE_NAMES[Number(m.state)] !== 'OPEN') continue;
@@ -157,7 +159,11 @@ export async function runLoop(): Promise<void> {
     // RECONCILE (deferred to the relayer + a later settlement check)
     rec('RECONCILE', mandateId, { note: 'source tx broadcast; Attestcoin proof + setld settlement decide the outcome, not the agent', sepoliaExecuteTx: exec.hash });
     outcomes.push({ mandateId, decision: 'ACCEPT', rationale: decision.rationale, finalState: 'awaiting-settlement' });
+   } catch (e) {
+     console.error('  mandate error:', (e as Error).message);
+   }
   }
+  } finally {
 
   // FEEDBACK
   rec('FEEDBACK', '-', { decisions: outcomes });
@@ -175,6 +181,7 @@ export async function runLoop(): Promise<void> {
   const accepts = outcomes.filter((o) => o.decision === 'ACCEPT').length;
   const abstains = outcomes.filter((o) => o.decision === 'ABSTAIN').length;
   console.log(`\n${accepts} ACCEPT, ${abstains} ABSTAIN -> evidence/agent/decision-log.json`);
+  }
   void readFileSync;
   void keccak256;
   void toUtf8Bytes;

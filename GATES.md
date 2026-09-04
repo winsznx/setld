@@ -17,7 +17,7 @@ No later phase may build on a gate that has not passed.
 | S9 | Public Attestcoin refusal lifecycle | BLOCKED | | needs funded wallets |
 | S10 | Sponsor-removal / reporter-compromise ablation | TODO | | |
 | S11 | Wide-proof campaign | BLOCKED | | needs funded wallets |
-| S12 | Product lifecycle + fresh-user proof | BLOCKED | | needs `design.md` |
+| S12 | Product lifecycle + fresh-user proof | PARTIAL | 2026-09-04 | agent loop: real model ACCEPT (+on-chain accept/execute) + real model ABSTAIN + guardrail ABSTAIN, evidence/agent/. Web product (design.md ready) + fresh-user tests pending. |
 | S13 | Production-path evidence | TODO | | |
 | S14 | Open-source residue | TODO | | |
 | S15 | Submission integrity + judge path | TODO | | |

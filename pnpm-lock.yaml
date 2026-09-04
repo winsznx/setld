@@ -25,6 +25,15 @@ importers:
         specifier: ^2.1.9
         version: 2.1.9(@types/node@22.7.5)
 
+  apps/agent:
+    dependencies:
+      '@setld/orchestrator':
+        specifier: workspace:*
+        version: link:../orchestrator
+      ethers:
+        specifier: ^6.15.0
+        version: 6.17.0
+
   apps/orchestrator:
     dependencies:
       '@gluwa/usc-sdk':

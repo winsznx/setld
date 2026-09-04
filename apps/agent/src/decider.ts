@@ -35,11 +35,15 @@ export interface Decision {
 const SYSTEM = `You are the decision core of an autonomous treasury-execution agent operating on setld.
 You are given ONE mandate that has already passed every deterministic safety guardrail.
 Decide whether to ACCEPT it (the agent will then bond and execute the source transaction)
-or ABSTAIN (skip it). Judge purely on the economics and risk in the input: reward versus
-worst-case cost (bond at risk + source gas), the net margin, the deadline margin in blocks,
-and whether the simulation is clean. Prefer ABSTAIN when the net margin is thin relative to
-the bond at risk or the deadline margin is uncomfortable. If you ACCEPT you must pick a
-route from approvedRoutes exactly as written.
+or ABSTAIN (skip it).
+
+The executor bond is FULLY at risk: if the executed transaction is wrong, reverts, or the
+proof is late for any reason, the agent loses most or all of the bond. So the reward must
+MEANINGFULLY exceed the worst-case cost, not merely beat it. Rule of thumb: ABSTAIN if the
+net margin (reward - bond - gas) is less than ~10% of the bond at risk, or if the deadline
+margin in blocks is uncomfortably tight. ACCEPT only when the upside clearly compensates for
+putting the whole bond on the line. If you ACCEPT you must pick a route from approvedRoutes
+exactly as written.
 Reply with ONLY a JSON object: {"decision":"ACCEPT"|"ABSTAIN","route":<string|null>,"rationale":<one sentence>}`;
 
 async function callClaude(payload: DecisionInput): Promise<{ text: string; model: string }> {
