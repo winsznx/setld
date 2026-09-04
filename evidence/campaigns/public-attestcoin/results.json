@@ -73,5 +73,102 @@
     "match": "ERROR",
     "error": "getaddrinfo ENOTFOUND rpc.cc3-testnet.creditcoin.network",
     "recordedAt": "2026-09-04T12:02:52.998Z"
+  },
+  {
+    "label": "wide-valid-1788536229944",
+    "mandateId": "0xb48d178fddaca0a1ea2298454877ee3038c8364b0ed84200e29828704dc9aa39",
+    "match": "PASS",
+    "terminal": "FULFILLED",
+    "code": "FULFILLED",
+    "sepoliaExecute": "0x2ab0ebf1fa383c551387c59635c7e2dfba22e382531b43a05aa312e7ec6c7b04",
+    "settleTx": "0xa6cabe845cf4ee69210085a56f0be049a8eac794ab2cd564df27e06db045c842",
+    "settleGasUsed": 675206,
+    "sourceToSettlementSeconds": 582,
+    "attestcoinProofHeader": 11634361,
+    "recordedAt": "2026-09-04T15:47:32.570Z"
+  },
+  {
+    "label": "wide-over-cap-1788536229945",
+    "mandateId": "0xf86d148070c4c514d26d3f37fff99fed40229e911c0aff72aa94269152267b73",
+    "match": "PASS",
+    "terminal": "INVALID_ATTEMPT",
+    "code": "AMOUNT_IN_OVER_CAP",
+    "sepoliaExecute": "0x4f53f918bf75f47cd803f8cb7f015190d6189c23c0fe7460b610325645947feb",
+    "settleTx": "0x37ea3d242a2d2194d3df366be673460ae1b7f587561ab5b9098c1657c391d3be",
+    "settleGasUsed": 666330,
+    "sourceToSettlementSeconds": 573,
+    "attestcoinProofHeader": 11634411,
+    "recordedAt": "2026-09-04T15:57:48.873Z"
+  },
+  {
+    "label": "wide-low-minout-1788536229946",
+    "mandateId": "0xd31aa7a50a87add85b45ee3e96edc188a9cd179abf2c2549708127a534080e2f",
+    "match": "PASS",
+    "terminal": "INVALID_ATTEMPT",
+    "code": "MIN_OUT_BELOW_FLOOR",
+    "sepoliaExecute": "0xc980a2d87f30d2d5106aae4da40b369e50f51861481464307823810599010787",
+    "settleTx": "0x51806a959c9892dcbd37ac3b7cdc7dfc3fbd86195085b46e0d7f169ce0ecff52",
+    "settleGasUsed": 666330,
+    "sourceToSettlementSeconds": 561,
+    "attestcoinProofHeader": 11634461,
+    "recordedAt": "2026-09-04T16:07:51.759Z"
+  },
+  {
+    "label": "wide-valid-1788536229947",
+    "mandateId": "0xacff60b034dac0045f8f8fd08111f42186d285075aae5961ccb9d3a138d543b7",
+    "match": "PASS",
+    "terminal": "FULFILLED",
+    "code": "FULFILLED",
+    "sepoliaExecute": "0x75d18e0a1fdbed0d670c07a82c33abfb190ed0b349b3001e4f77dd42e36edc3c",
+    "settleTx": "0xadc302bc42b8973f7855242df1abd743a225eba9fd1c779d878922bf282989c4",
+    "settleGasUsed": 675206,
+    "sourceToSettlementSeconds": 591,
+    "attestcoinProofHeader": 11634511,
+    "recordedAt": "2026-09-04T16:18:19.609Z"
+  },
+  {
+    "label": "wide-over-cap-1788536229948",
+    "mandateId": "0x55c3e3e4fc16a5231f2828a5edfef312c837cfb3c16719829cba5cc0319805a2",
+    "match": "PASS",
+    "terminal": "INVALID_ATTEMPT",
+    "code": "AMOUNT_IN_OVER_CAP",
+    "sepoliaExecute": "0xe4edc496ed3f0836130c0254834e140ef5166bad28a806bc1beb4d878fe11724",
+    "settleTx": "0x68bc71dc4c0dcc69b3550e4a6b4c2739df807b3af225b49543916cec085a51b0",
+    "settleGasUsed": 666330,
+    "sourceToSettlementSeconds": 570,
+    "attestcoinProofHeader": 11634561,
+    "recordedAt": "2026-09-04T16:28:36.387Z"
+  },
+  {
+    "label": "wide-low-minout-1788536229949",
+    "match": "ERROR",
+    "error": "write EPROTO 40B51EFC01000000:error:0A00041B:SSL routines:ssl3_read_bytes:tlsv1 alert decrypt error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:918:SSL alert number 51\n",
+    "recordedAt": "2026-09-04T16:29:02.876Z"
+  },
+  {
+    "label": "wide-valid-1788536229950",
+    "mandateId": "0x2ea6d061f196e82ac66a3554df3e7d758fa1a59c7c5eb2d92c614e9d0c0b4387",
+    "match": "PASS",
+    "terminal": "FULFILLED",
+    "code": "FULFILLED",
+    "sepoliaExecute": "0x010fbcf83aa9d5ee55573ab9d2b9b8a6a3c65d4c0e34c83acc414d7daf70c7ad",
+    "settleTx": "0xdc8ed5bdf25598a230d5d8da41c53b8821b066d678b056a9c287df35d5c98e12",
+    "settleGasUsed": 674310,
+    "sourceToSettlementSeconds": 564,
+    "attestcoinProofHeader": 11634613,
+    "recordedAt": "2026-09-04T16:39:05.400Z"
+  },
+  {
+    "label": "wide-over-cap-1788536229951",
+    "mandateId": "0x359d55ce7da8ffd95d44cf507b8716a9092be3e8c787a3a272205a5272712294",
+    "match": "PASS",
+    "terminal": "INVALID_ATTEMPT",
+    "code": "AMOUNT_IN_OVER_CAP",
+    "sepoliaExecute": "0x5bd946d04a4f3c0c2fefe6f534cfaf0309ac276ba5e6f07fa9bc8e3f8d9a71f4",
+    "settleTx": "0xd0cefee74de441ce8d6f57503376ac277b86af03f828b001dd3d478753e3b575",
+    "settleGasUsed": 666330,
+    "sourceToSettlementSeconds": 564,
+    "attestcoinProofHeader": 11634661,
+    "recordedAt": "2026-09-04T16:49:06.733Z"
   }
 ]

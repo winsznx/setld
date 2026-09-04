@@ -1,0 +1,95 @@
+{
+  "label": "wide-valid-1788536229947",
+  "recordedAt": "2026-09-04T16:18:18.427Z",
+  "network": {
+    "creditcoin": 102031,
+    "sepolia": 11155111
+  },
+  "mandateId": "0xacff60b034dac0045f8f8fd08111f42186d285075aae5961ccb9d3a138d543b7",
+  "params": "{\n  \"rewardAmount\": \"4000000000000000000\",\n  \"executorBond\": \"2000000000000000000\",\n  \"creatorBond\": \"1000000000000000000\",\n  \"relayerBudget\": \"1000000000000000000\",\n  \"maxAmountIn\": \"10000000000000000000000\",\n  \"minAmountOut\": \"9000000000000000000000\",\n  \"execMinOut\": \"9000000000000000000000\",\n  \"label\": \"wide-valid-1788536229947\",\n  \"execAmountIn\": \"5000000000000000000000\",\n  \"expectTerminal\": \"FULFILLED\"\n}",
+  "transactions": {
+    "createMandate": "0x68c3e339a17aa9268676e03c195197dff7742b1c3a9361de2dad787c342cbf8f",
+    "acceptAndBond": "0xb76b21d378592edbbc1cba3f80f2fabf36559168ae76f724f8118901c379a6b4",
+    "sepoliaExecute": "0x75d18e0a1fdbed0d670c07a82c33abfb190ed0b349b3001e4f77dd42e36edc3c",
+    "sepoliaExecuteExplorer": "https://sepolia.etherscan.io/tx/0x75d18e0a1fdbed0d670c07a82c33abfb190ed0b349b3001e4f77dd42e36edc3c",
+    "settle": "0xadc302bc42b8973f7855242df1abd743a225eba9fd1c779d878922bf282989c4"
+  },
+  "sourceExecution": {
+    "block": 11634511,
+    "receiptStatus": 1,
+    "note": "Ethereum transaction SUCCEEDED"
+  },
+  "attestcoinProof": {
+    "chainKey": 1,
+    "headerNumber": 11634511,
+    "transactionIndex": 122,
+    "txHash": "0x75d18e0a1fdbed0d670c07a82c33abfb190ed0b349b3001e4f77dd42e36edc3c",
+    "cached": true,
+    "generatedAt": "2026-09-04T16:18:10.421171791Z",
+    "merkleRoot": "0xb4c7c6330d944468ace07b232544bd8ebff0b2d99eb94c580fd5a93ce443a56c",
+    "continuityRoots": 10
+  },
+  "verifiedExecution": {
+    "sourceChainKey": 1,
+    "blockHeight": 11634511,
+    "transactionIndex": 122,
+    "sourceTxKey": "0x34a9e5b34090f892f95b831834e7de7bf560cbd7fd76194a913cdb520a916ee6",
+    "txFrom": "0xD76455eB2015591A239ef651518d0e9BEeF4787F",
+    "txTo": "0x6cCB5496e2752BDA84730122832aE732ae96D389",
+    "txToIsNull": false,
+    "txValue": "0",
+    "selector": "0xc85bcd18",
+    "calldata": "0xc85bcd18acff60b034dac0045f8f8fd08111f42186d285075aae5961ccb9d3a138d543b7000000000000000000000000dcf3bb782f28279c6271b20dc5e3ed8f8d83c537000000000000000000000000a70040b6adcf432dc817e8886fe9eadebd8872380000000000000000000000008310b2cf26e2d2571abdf6cec38043d2018e156000000000000000000000000000000000000000000000010f0cf064dd592000000000000000000000000000000000000000000000000001e7e4171bf4d3a00000",
+    "receiptStatus": 1,
+    "receiptGasUsed": "59933",
+    "logs": [
+      {
+        "emitter": "0x6cCB5496e2752BDA84730122832aE732ae96D389",
+        "topics": [
+          "0xaaf8ab446cca74260aa24a3796d7227de55390e1f526fbdc4fd9645d6ff62007",
+          "0xacff60b034dac0045f8f8fd08111f42186d285075aae5961ccb9d3a138d543b7",
+          "0x000000000000000000000000d76455eb2015591a239ef651518d0e9beef4787f",
+          "0x000000000000000000000000dcf3bb782f28279c6271b20dc5e3ed8f8d83c537"
+        ],
+        "data": "0x000000000000000000000000a70040b6adcf432dc817e8886fe9eadebd8872380000000000000000000000008310b2cf26e2d2571abdf6cec38043d2018e156000000000000000000000000000000000000000000000010f0cf064dd592000000000000000000000000000000000000000000000000001e7e4171bf4d3a00000"
+      },
+      {
+        "emitter": "0x8310B2Cf26e2D2571AbdF6cEC38043D2018e1560",
+        "topics": [
+          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+          "0x000000000000000000000000dcf3bb782f28279c6271b20dc5e3ed8f8d83c537",
+          "0x000000000000000000000000d76455eb2015591a239ef651518d0e9beef4787f"
+        ],
+        "data": "0x000000000000000000000000000000000000000000000202fefbf2d7c2f00000"
+      },
+      {
+        "emitter": "0xdCF3bb782f28279c6271B20dc5E3eD8f8d83C537",
+        "topics": [
+          "0x2e2e12a60a82e45c3a89ab9f4d664990c4e04ca3d17c2f473c91a6eae663c752"
+        ],
+        "data": "0xacff60b034dac0045f8f8fd08111f42186d285075aae5961ccb9d3a138d543b7000000000000000000000000d76455eb2015591a239ef651518d0e9beef4787f000000000000000000000000a70040b6adcf432dc817e8886fe9eadebd8872380000000000000000000000008310b2cf26e2d2571abdf6cec38043d2018e156000000000000000000000000000000000000000000000010f0cf064dd59200000000000000000000000000000000000000000000000000202fefbf2d7c2f00000"
+      },
+      {
+        "emitter": "0x6cCB5496e2752BDA84730122832aE732ae96D389",
+        "topics": [
+          "0x1a5bd54cbdafb7016907a027dec570b2958c3f9924638f95bbcb1719d023f58d",
+          "0xacff60b034dac0045f8f8fd08111f42186d285075aae5961ccb9d3a138d543b7",
+          "0x000000000000000000000000d76455eb2015591a239ef651518d0e9beef4787f",
+          "0x000000000000000000000000dcf3bb782f28279c6271b20dc5e3ed8f8d83c537"
+        ],
+        "data": "0x000000000000000000000000000000000000000000000202fefbf2d7c2f00000"
+      }
+    ]
+  },
+  "referenceModelPrediction": "FULFILLED",
+  "onChainSettlement": {
+    "code": "FULFILLED",
+    "failedStep": 0,
+    "terminalState": "FULFILLED",
+    "sourceTxKey": "0x34a9e5b34090f892f95b831834e7de7bf560cbd7fd76194a913cdb520a916ee6"
+  },
+  "settleError": null,
+  "finalState": "FULFILLED",
+  "expectedTerminal": "FULFILLED",
+  "match": "PASS"
+}
