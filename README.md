@@ -40,11 +40,11 @@ Two mandates, same Attestcoin verifier, opposite results:
 | | Correct execution | Verified but wrong execution |
 |---|---|---|
 | Ethereum transaction | succeeded (receipt status 1) | **succeeded (receipt status 1)** — `amountIn` 25 000 over the committed cap of 10 000 |
-| Attestcoin proof | verified (block 11 629 791, tx 111) | verified (block 11 629 847, tx 183) |
+| Attestcoin proof | verified (block 11 632 681, tx 109) | verified (block 11 632 731) |
 | setld predicate | every field passed | failed on `AMOUNT_IN_OVER_CAP` at step 11 |
 | Reward | released to the executor | refunded to the creator |
 | Executor bond | returned | 100% penalty applied |
-| Settlement tx | [`0x6ee3bf87…`](https://dashboard.cc3-testnet.creditcoin.network/tx/0x6ee3bf874102a2e1b15d0dca667bbe4038aeb08179b6ebc410465eddc1f99451) | [`0x8bca31f6…`](https://dashboard.cc3-testnet.creditcoin.network/tx/0x8bca31f60ad92bb676f5efc0b8ab0f62d4a8a5611f00704ee62357ad6ccd3037) |
+| Settlement tx | [`0x56f0adde…`](https://dashboard.cc3-testnet.creditcoin.network/tx/0x56f0addefd9ac86220f02dbb6c0f8fa72c7461a23727ce2b6ede0101030dad4b) | [`0x20f9e00e…`](https://dashboard.cc3-testnet.creditcoin.network/tx/0x20f9e00ec36861521edeb410c1f3aa84cb5dec831026d463cd04842268841fc9) |
 
 The wrong case is the point: a **successful, Attestcoin-verifiable** Ethereum transaction that
 violates one committed field. Not a revert. setld refuses it with no human evaluator.
@@ -70,8 +70,8 @@ the predicate row below.
 
 ## Public proof links
 
-- Correct mandate record: https://setld.pages.dev/mandates/0x2e69eac5b98a7192868083b62ad5d756aa917a019ac0c0a701b117e3a43094c7
-- Verified-but-wrong record: https://setld.pages.dev/mandates/0x507b1d27d27cc9121a7f1af24bb364efbde7c49d6856ec0fef91f354b6f9950d
+- Correct mandate record: https://setld.pages.dev/mandates/0x907043a3e8db72db45e0fd737b69d8975a53570487ff1b4c47f3db3cc1fb9598
+- Verified-but-wrong record: https://setld.pages.dev/mandates/0xc28c59bac1c4ca108af0361c0cf27820a0455c57eff53ab05b3f9da3fe5e9360
 - Browser-side independent recompute: https://setld.pages.dev/verify
 - Replay + submitter-neutrality evidence: [`evidence/negative/replay-and-neutrality.json`](evidence/negative/replay-and-neutrality.json)
 - Autonomous agent decision log: [`evidence/agent/decision-log.json`](evidence/agent/decision-log.json)
@@ -85,8 +85,7 @@ the predicate row below.
 - **The honest baseline is real.** `BaselineReporterSettlement` runs the *same* reference-model
   predicate the honest way. It only diverges from setld when the reporter is compromised —
   which is exactly the trust assumption Attestcoin removes.
-- **Attestation latency.** During the build, CC3↔Sepolia attestation ran ~1 block/min net; a
-  fresh source transaction takes ~20–30 min to become provable. The live demo uses
+- **Attestation latency.** During the build, CC3↔Sepolia attestation ran ~1 block/min net (and briefly stalled on 2026-09-04); a fresh source transaction takes ~20–40 min to become provable. The live demo uses
   pre-generated proofs (the proof material is public and re-verifiable on-chain any time).
 - **What Attestcoin proves vs. what setld decides.** Attestcoin proves *what happened* on
   Ethereum. setld's predicate decides whether what happened satisfied the job. The wrong-case
@@ -126,8 +125,8 @@ Gate log: [`GATES.md`](GATES.md). Decisions and corrected assumptions: [`DECISIO
 pnpm install
 pnpm probe:attestcoin        # S0/S1: live environment + field-extraction proof
 cd contracts && forge test   # reference-model parity, vault invariants, lifecycle guards
-cd .. && pnpm verify:mandate --id 0x2e69eac5b98a7192868083b62ad5d756aa917a019ac0c0a701b117e3a43094c7
-pnpm verify:mandate --id 0x2e69eac5b98a7192868083b62ad5d756aa917a019ac0c0a701b117e3a43094c7 --tamper
+cd .. && pnpm verify:mandate --id 0x907043a3e8db72db45e0fd737b69d8975a53570487ff1b4c47f3db3cc1fb9598
+pnpm verify:mandate --id 0x907043a3e8db72db45e0fd737b69d8975a53570487ff1b4c47f3db3cc1fb9598 --tamper
 ```
 
 No funded wallet, model credits, or private service credentials are needed to verify the

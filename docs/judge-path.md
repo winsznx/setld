@@ -16,7 +16,7 @@ No wallet, no local setup, no repository search.
    re-decodes the bytes through the deployed `EvmV1Decoder`, re-runs the predicate, and
    checks conservation. All six checks pass, `Result: match`.
 7. Optional, from a terminal:
-   `git clone https://github.com/winsznx/setld && cd setld && pnpm i && pnpm verify:mandate --id 0x2e69eac5b98a7192868083b62ad5d756aa917a019ac0c0a701b117e3a43094c7 --tamper`
+   `git clone https://github.com/winsznx/setld && cd setld && pnpm i && pnpm verify:mandate --id 0x907043a3e8db72db45e0fd737b69d8975a53570487ff1b4c47f3db3cc1fb9598 --tamper`
    — the tamper run flips one calldata word and shows the predicate diverges.
 
 ---
@@ -24,7 +24,7 @@ No wallet, no local setup, no repository search.
 # 90-second repository walkthrough
 
 1. `GATES.md` — every verification gate with its status, date, and the transaction hashes
-   that back it. S0/S1/S2/S3/S4/S5/S7/S8/S9/S10 PASS.
+   that back it. S0–S10 PASS (S6 too).
 2. `evidence/manifests/environment.json` — the live S0/S1 probe: a real Sepolia tx proven
    and verified on CC3, every predicate field present, `missingRequiredFields: []`.
 3. `contracts/src/creditcoin/adapters/SetldAttestcoinAdapter.sol` — the Attestcoin seam.

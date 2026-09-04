@@ -1,39 +1,39 @@
 {
-  "recordedAt": "2026-09-04T09:49:35.186Z",
+  "recordedAt": "2026-09-04T10:11:12.348Z",
   "gate": "S13",
   "n": 2,
   "settleGasUsed": {
-    "p50": 672252,
-    "p95": 672252,
-    "min": 660688,
-    "max": 672252
+    "p50": 675206,
+    "p95": 675206,
+    "min": 666330,
+    "max": 675206
   },
   "sourceToSettlementSeconds": {
-    "p50": 615,
-    "p95": 615,
-    "min": 486,
-    "max": 615
+    "p50": 570,
+    "p95": 570,
+    "min": 567,
+    "max": 570
   },
   "note": "settle gas = verify() precompile + EvmV1Decoder decode + 17-step predicate + vault transfers, in one Creditcoin transaction. Latency dominated by CC3<->Sepolia attestation throughput during the build (~5 blocks/min).",
   "rows": [
     {
       "label": "canonical-correct",
-      "settleGasUsed": 672252,
-      "settleTx": "0x6ee3bf874102a2e1b15d0dca667bbe4038aeb08179b6ebc410465eddc1f99451",
-      "sourceBlockTime": 1788478860,
-      "settlementBlockTime": 1788479475,
-      "sourceToSettlementSeconds": 615,
-      "proofGeneratedAt": "2026-09-03T23:51:11.331773519Z",
+      "settleGasUsed": 675206,
+      "settleTx": "0x56f0addefd9ac86220f02dbb6c0f8fa72c7461a23727ce2b6ede0101030dad4b",
+      "sourceBlockTime": 1788515208,
+      "settlementBlockTime": 1788515775,
+      "sourceToSettlementSeconds": 567,
+      "proofGeneratedAt": "2026-09-04T09:56:06.869996444Z",
       "terminal": "FULFILLED"
     },
     {
       "label": "canonical-wrong-cap",
-      "settleGasUsed": 660688,
-      "settleTx": "0x8bca31f60ad92bb676f5efc0b8ab0f62d4a8a5611f00704ee62357ad6ccd3037",
-      "sourceBlockTime": 1788479604,
-      "settlementBlockTime": 1788480090,
-      "sourceToSettlementSeconds": 486,
-      "proofGeneratedAt": "2026-09-04T00:01:25.301052957Z",
+      "settleGasUsed": 666330,
+      "settleTx": "0x20f9e00ec36861521edeb410c1f3aa84cb5dec831026d463cd04842268841fc9",
+      "sourceBlockTime": 1788515820,
+      "settlementBlockTime": 1788516390,
+      "sourceToSettlementSeconds": 570,
+      "proofGeneratedAt": "2026-09-04T10:06:24.816997818Z",
       "terminal": "INVALID_ATTEMPT"
     }
   ],

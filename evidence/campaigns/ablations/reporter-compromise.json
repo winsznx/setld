@@ -1,14 +1,14 @@
 {
-  "recordedAt": "2026-09-04T00:12:46.801Z",
+  "recordedAt": "2026-09-04T10:11:16.550Z",
   "gates": [
     "S5",
     "S10"
   ],
-  "baselineContract": "0x513181882743A3b692A2dC6363f69AD919f57496",
+  "baselineContract": "0x34A8CFb02169D92a86ECF45394167C8369C8DC69",
   "reporter": "0x03D9bd775aE2D7757e79B9CC6B9abDaE85D27b66",
   "matchedInputs": [
-    "0x7a75870118074921debc68321ee969e3bb4b08850f638982954f5c448f0bb6d3",
-    "0x5e39e355f10dc74df3abdac923e8b8cf0592b8a5586b478e634f3438bdfd20e8"
+    "0xa9df340ed955a3d1acde7b218a53503a6ec0a20313f5d575a8192027963c73ba",
+    "0xb1e4cb611e4f31a5d2bd85ea879539da455630990f832722fabf04e457b74849"
   ],
   "honestParity": {
     "disagreements": 0,
@@ -24,7 +24,7 @@
   "results": [
     {
       "case": "correct",
-      "sepoliaExecuteTx": "0x7a75870118074921debc68321ee969e3bb4b08850f638982954f5c448f0bb6d3",
+      "sepoliaExecuteTx": "0xa9df340ed955a3d1acde7b218a53503a6ec0a20313f5d575a8192027963c73ba",
       "setld_T0": {
         "terminal": "FULFILLED",
         "code": "FULFILLED"
@@ -32,7 +32,7 @@
       "reporter_honest_judgment": "FULFILLED",
       "honest_B0_matches_setld": true,
       "honest_B0": {
-        "settleTx": "0x066cf9f3d72108426ca6b7944f402b3d49c1f49a549612af08363de05880d60a",
+        "settleTx": "0xef7b4fa65d43561b5ce181c50f2fd5b619e5d033dc8f30666b3c8f2574406c63",
         "executorGain": "14.5",
         "rewardPaid": true
       },
@@ -40,7 +40,7 @@
     },
     {
       "case": "over-cap",
-      "sepoliaExecuteTx": "0x5e39e355f10dc74df3abdac923e8b8cf0592b8a5586b478e634f3438bdfd20e8",
+      "sepoliaExecuteTx": "0xb1e4cb611e4f31a5d2bd85ea879539da455630990f832722fabf04e457b74849",
       "setld_T0": {
         "terminal": "INVALID_ATTEMPT",
         "code": "AMOUNT_IN_OVER_CAP"
@@ -48,12 +48,12 @@
       "reporter_honest_judgment": "AMOUNT_IN_OVER_CAP",
       "honest_B0_matches_setld": true,
       "honest_B0": {
-        "settleTx": "0x56296ff5b2b218f39d94935c7078ce622e5f64ea4bbf232671c16edaffdcad29",
+        "settleTx": "0xcc612406bb4e02fbf72ccee178ca09d45664a2004afa916c827cbb35cc578eb5",
         "executorGain": "0.0",
         "rewardPaid": false
       },
       "compromised_B0": {
-        "settleTx": "0xe9907819a3feca189a06e2c156a01205586a6ab95c90d2ce4a628e725d26b447",
+        "settleTx": "0x506729e26c0b391d42d817ce7ec27bfab59e5b8bade98392dfa72b1094ea8d57",
         "executorGain": "14.5",
         "rewardPaid": true,
         "leakedRewardWei": "10000000000000000000"

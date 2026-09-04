@@ -21,14 +21,14 @@ const CHAIN_KEY = 1;
 const abi = AbiCoder.defaultAbiCoder();
 
 const PROOFS: Record<string, typeof correctProof> = {
-  '0x2e69eac5b98a7192868083b62ad5d756aa917a019ac0c0a701b117e3a43094c7': correctProof,
-  '0x507b1d27d27cc9121a7f1af24bb364efbde7c49d6856ec0fef91f354b6f9950d': wrongProof,
+  '0x907043a3e8db72db45e0fd737b69d8975a53570487ff1b4c47f3db3cc1fb9598': correctProof,
+  '0xc28c59bac1c4ca108af0361c0cf27820a0455c57eff53ab05b3f9da3fe5e9360': wrongProof,
 };
 const SETTLE_TX: Record<string, string> = {
-  '0x2e69eac5b98a7192868083b62ad5d756aa917a019ac0c0a701b117e3a43094c7':
-    '0x6ee3bf874102a2e1b15d0dca667bbe4038aeb08179b6ebc410465eddc1f99451',
-  '0x507b1d27d27cc9121a7f1af24bb364efbde7c49d6856ec0fef91f354b6f9950d':
-    '0x8bca31f60ad92bb676f5efc0b8ab0f62d4a8a5611f00704ee62357ad6ccd3037',
+  '0x907043a3e8db72db45e0fd737b69d8975a53570487ff1b4c47f3db3cc1fb9598':
+    '0x56f0addefd9ac86220f02dbb6c0f8fa72c7461a23727ce2b6ede0101030dad4b',
+  '0xc28c59bac1c4ca108af0361c0cf27820a0455c57eff53ab05b3f9da3fe5e9360':
+    '0x20f9e00ec36861521edeb410c1f3aa84cb5dec831026d463cd04842268841fc9',
 };
 
 const CORE_ABI = [

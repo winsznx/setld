@@ -19,26 +19,26 @@
       "proofLevel": 9,
       "sourceNetwork": "Sepolia",
       "executionNetwork": "Creditcoin CC3 testnet",
-      "sourceTx": "0x7a75870118074921debc68321ee969e3bb4b08850f638982954f5c448f0bb6d3",
-      "creditcoinTx": "0x6ee3bf874102a2e1b15d0dca667bbe4038aeb08179b6ebc410465eddc1f99451",
+      "sourceTx": "0xa9df340ed955a3d1acde7b218a53503a6ec0a20313f5d575a8192027963c73ba",
+      "creditcoinTx": "0x56f0addefd9ac86220f02dbb6c0f8fa72c7461a23727ce2b6ede0101030dad4b",
       "evidence": ["evidence/completed-mandates/canonical-correct.json"],
-      "verificationCommand": "pnpm verify:mandate --id 0x2e69eac5b98a7192868083b62ad5d756aa917a019ac0c0a701b117e3a43094c7",
+      "verificationCommand": "pnpm verify:mandate --id 0x907043a3e8db72db45e0fd737b69d8975a53570487ff1b4c47f3db3cc1fb9598",
       "numerator": 1,
       "denominator": 1,
-      "note": "re-running against nonReentrant-hardened contracts; new hashes will replace these"
+      "note": "verified on the nonReentrant-hardened deployment (core 0x975c043b) after the Attestcoin Sepolia attestor recovered"
     },
     {
       "claimId": "setld-s9-verified-but-wrong",
       "wording": "A Sepolia transaction that SUCCEEDED on Ethereum (receipt status 1) but exceeded the committed amount cap was Attestcoin-verified and then refused by setld as INVALID_ATTEMPT, with the reward refunded and a 100% executor bond penalty.",
       "status": "verified",
       "proofLevel": 9,
-      "sourceTx": "0x5e39e355f10dc74df3abdac923e8b8cf0592b8a5586b478e634f3438bdfd20e8",
-      "creditcoinTx": "0x8bca31f60ad92bb676f5efc0b8ab0f62d4a8a5611f00704ee62357ad6ccd3037",
+      "sourceTx": "0xb1e4cb611e4f31a5d2bd85ea879539da455630990f832722fabf04e457b74849",
+      "creditcoinTx": "0x20f9e00ec36861521edeb410c1f3aa84cb5dec831026d463cd04842268841fc9",
       "evidence": ["evidence/completed-mandates/canonical-wrong-cap.json"],
-      "verificationCommand": "pnpm verify:mandate --id 0x507b1d27d27cc9121a7f1af24bb364efbde7c49d6856ec0fef91f354b6f9950d",
+      "verificationCommand": "pnpm verify:mandate --id 0xc28c59bac1c4ca108af0361c0cf27820a0455c57eff53ab05b3f9da3fe5e9360",
       "numerator": 1,
       "denominator": 1,
-      "note": "re-running against hardened contracts"
+      "note": "verified on the hardened deployment (core 0x975c043b)"
     },
     {
       "claimId": "setld-s2-replay-neutrality",
@@ -47,7 +47,7 @@
       "proofLevel": 9,
       "evidence": ["evidence/negative/replay-and-neutrality.json"],
       "verificationCommand": "pnpm tsx apps/orchestrator/src/prove-replay-neutrality.ts",
-      "note": "re-running against hardened contracts"
+      "note": "verified on the hardened deployment (core 0x975c043b)"
     },
     {
       "claimId": "setld-s5-honest-parity",

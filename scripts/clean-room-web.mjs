@@ -4,8 +4,8 @@ const checks = [
   ['/', ['The agent did not report completion. The receipt did.', 'View the live proof']],
   ['/proof/', ['Attestcoin verifier proved both', 'invalid reward leaked', 'How could this result be misleading']],
   ['/verify/', ['Verify a mandate', 'BlockProver precompile']],
-  ['/mandates/0x2e69eac5b98a7192868083b62ad5d756aa917a019ac0c0a701b117e3a43094c7/', ['Mandate record', 'reward was released']],
-  ['/mandates/0x507b1d27d27cc9121a7f1af24bb364efbde7c49d6856ec0fef91f354b6f9950d/', ['Mandate record', 'violated a committed condition']],
+  ['/mandates/0x907043a3e8db72db45e0fd737b69d8975a53570487ff1b4c47f3db3cc1fb9598/', ['Mandate record', 'reward was released']],
+  ['/mandates/0xc28c59bac1c4ca108af0361c0cf27820a0455c57eff53ab05b3f9da3fe5e9360/', ['Mandate record', 'violated a committed condition']],
 ];
 let fail = 0;
 const results = [];

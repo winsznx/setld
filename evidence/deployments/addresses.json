@@ -9,12 +9,12 @@
     "blockAtRecord": 5428355,
     "evmVersionUsed": "london (CC3 RPC omits mixHash; foundry block polling incompatible, deploys done via cast/ethers)",
     "contracts": {
-      "SetldCore": "0x51bc24EABC070ed043Bd1c4d7A510ddd6AFe07C6",
-      "SetldVault": "0x3a1f476b5A24CE85A173360e6D0e86A2dDAf7d5d",
-      "SetldExecutorRegistry": "0x7E873746199c7869f37db1074787A4d78038af91",
-      "SetldAttestcoinAdapter": "0x324D83Ed022cC976F602712eaecf6C37Bd34ddF3",
-      "tSETLD": "0xf30A0f56AF00D0f514fEE13D2f48aDD49A7AFE1A",
-      "BaselineReporterSettlement": "0x513181882743A3b692A2dC6363f69AD919f57496"
+      "SetldCore": "0x975c043bFdD755B2365489E308C17f26e762DEF4",
+      "SetldVault": "0x3ce979E2C5187BaDC97a95bc7deE941A821FF4DF",
+      "SetldExecutorRegistry": "0x035065Bc14116077e253fe6598E867bae522d10D",
+      "SetldAttestcoinAdapter": "0x3AD1325E131c2FF24fe4c5a55cC6D675dF2566c5",
+      "tSETLD": "0x0D73B33A01a9Dcb076Cd401EA27dF8310c9dDA02",
+      "BaselineReporterSettlement": "0x34A8CFb02169D92a86ECF45394167C8369C8DC69"
     },
     "attestcoin": {
       "blockProverPrecompile": "0x0000000000000000000000000000000000000FD2",
@@ -30,9 +30,8 @@
       "executorOwner": "0xb3Fbde35DcA37D65F19f2b40BbC2e8E6Fef3956C",
       "relayer": "0x03D9bd775aE2D7757e79B9CC6B9abDaE85D27b66"
     },
-    "redeployedAt": "2026-09-04T09:44:18.607Z",
     "baselineReporter": "0x03D9bd775aE2D7757e79B9CC6B9abDaE85D27b66",
-    "note": "Canonical deployment for all published S8/S9/S2/S5/S10 evidence. Source = repo at commit 12d941e (README/fuzz/CI), i.e. main minus the later SetldVault nonReentrant hardening (commit 3a2cbb5). A hardened redeploy (core 0x975c043b) exists but its public lifecycle re-run is blocked on the Attestcoin Sepolia attestor stalling at height ~11632670 on 2026-09-04."
+    "note": "Canonical deployment. Source = repo main HEAD (includes the SetldVault nonReentrant hardening). All S8/S9/S2/S5/S10 public evidence re-run against this set on 2026-09-04 after the Attestcoin Sepolia attestor recovered."
   },
   "sepolia": {
     "network": "Ethereum Sepolia",
