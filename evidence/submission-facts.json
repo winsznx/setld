@@ -102,12 +102,14 @@
     "CC3<->Sepolia attestation lag was ~1 block/min net during the build; a fresh source transaction takes ~20-30 min to become provable. The live demo uses pre-generated proofs (PRD 28 permits this).",
     "The 100-case deterministic campaign runs on a Foundry fork, not public testnet.",
     "The reporter-compromise ablation uses 2 matched real executions; it demonstrates the mechanism, it is not a large-sample study.",
-    "CC3 RPC omits mixHash; CC3 contracts are compiled with evm_version london and deployed via an ethers orchestrator rather than forge script."
+    "CC3 RPC omits mixHash; CC3 contracts are compiled with evm_version london and deployed via an ethers orchestrator rather than forge script.",
+    "Canonical contracts (core 0x51bc24EA) are main minus the later SetldVault nonReentrant hardening (commit 3a2cbb5), which is verified in forge tests + Slither but whose public lifecycle re-run is blocked on the Attestcoin Sepolia attestor stalling at ~height 11632670 on 2026-09-04. The hardening adds a reentrancy guard on top of the existing checks-effects-interactions + state guards; it does not change any settlement outcome."
   ],
   "deployedUrls": {
     "web": "https://setld.pages.dev",
     "proof": "https://setld.pages.dev/proof",
     "verify": "https://setld.pages.dev/verify",
     "repository": "https://github.com/winsznx/setld"
-  }
+  },
+  "deployedAtCommit": "12d941e"
 }
