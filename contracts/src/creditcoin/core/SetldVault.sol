@@ -29,11 +29,14 @@ contract SetldVault {
     // pull-payment ledger: account => asset => claimable
     mapping(address => mapping(address => uint256)) public claimable;
 
+    uint256 private _lock = 1;
+
     error NotAuthority();
     error NotAdmin();
     error DepositsPaused();
     error DepositAmountMismatch(uint256 requested, uint256 received);
     error EscrowInsufficient(bytes32 mandateId, address asset, uint256 have, uint256 want);
+    error Reentrancy();
 
     event Deposited(bytes32 indexed mandateId, address indexed asset, address indexed from, uint256 amount);
     event Paid(bytes32 indexed mandateId, address indexed asset, address indexed to, uint256 amount, bytes32 reason);
@@ -50,6 +53,14 @@ contract SetldVault {
         _;
     }
 
+    /// @dev Defense-in-depth alongside checks-effects-interactions and the token allowlist.
+    modifier nonReentrant() {
+        if (_lock != 1) revert Reentrancy();
+        _lock = 2;
+        _;
+        _lock = 1;
+    }
+
     function setDepositsPaused(bool paused) external {
         if (msg.sender != admin) revert NotAdmin();
         depositsPaused = paused;
@@ -59,7 +70,13 @@ contract SetldVault {
     /// @notice Pull `amount` of `asset` from `from` into `mandateId`'s escrow.
     /// @dev Uses measured delta, not the requested amount, and reverts on any shortfall so
     ///      unsupported token behavior cannot corrupt accounting.
-    function deposit(bytes32 mandateId, address asset, address from, uint256 amount) external onlyAuthority {
+    function deposit(bytes32 mandateId, address asset, address from, uint256 amount)
+        external
+        onlyAuthority
+        nonReentrant
+    {
+        // `from` is arbitrary by design: onlyAuthority (SetldCore) passes the createMandate /
+        // acceptMandate caller, who is pulling their OWN pre-approved funds. Not a griefing vector.
         if (depositsPaused) revert DepositsPaused();
         uint256 before = IERC20(asset).balanceOf(address(this));
         require(IERC20(asset).transferFrom(from, address(this), amount), "transferFrom");
@@ -71,7 +88,11 @@ contract SetldVault {
     }
 
     /// @notice Move `amount` of a mandate's escrow to `to` immediately (push).
-    function pay(bytes32 mandateId, address asset, address to, uint256 amount, bytes32 reason) external onlyAuthority {
+    function pay(bytes32 mandateId, address asset, address to, uint256 amount, bytes32 reason)
+        external
+        onlyAuthority
+        nonReentrant
+    {
         _debitEscrow(mandateId, asset, amount);
         accountedBalance[asset] -= amount;
         require(IERC20(asset).transfer(to, amount), "transfer");
@@ -82,13 +103,14 @@ contract SetldVault {
     function credit(bytes32 mandateId, address asset, address to, uint256 amount, bytes32 reason)
         external
         onlyAuthority
+        nonReentrant
     {
         _debitEscrow(mandateId, asset, amount);
         claimable[to][asset] += amount;
         emit Paid(mandateId, asset, to, amount, reason);
     }
 
-    function claim(address asset) external {
+    function claim(address asset) external nonReentrant {
         uint256 amount = claimable[msg.sender][asset];
         require(amount > 0, "nothing to claim");
         claimable[msg.sender][asset] = 0;

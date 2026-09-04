@@ -1420,6 +1420,11 @@
    "type": "error",
    "name": "NotAuthority",
    "inputs": []
+  },
+  {
+   "type": "error",
+   "name": "Reentrancy",
+   "inputs": []
   }
  ],
  "SetldExecutorRegistry": [
