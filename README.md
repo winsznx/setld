@@ -4,6 +4,7 @@
 
 Built for BUIDL CTC 2026 Fall — primary track: AI.
 Live: **https://setld.pages.dev** · Proof: **https://setld.pages.dev/proof**
+[![ci](https://github.com/winsznx/setld/actions/workflows/ci.yml/badge.svg)](https://github.com/winsznx/setld/actions/workflows/ci.yml)
 
 ---
 

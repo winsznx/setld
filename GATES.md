@@ -20,7 +20,7 @@ No later phase may build on a gate that has not passed.
 | S12 | Product lifecycle + fresh-user proof | PARTIAL | 2026-09-04 | public judge surface LIVE at https://setld.pages.dev (landing + /proof diptych + /verify browser-side recompute + /mandates/[id]), built to design.md, Cloudflare Pages. Agent loop evidence/agent/. Wallet-based creator/executor onboarding UI + Playwright fresh-user tests still pending. |
 | S13 | Production-path evidence | PARTIAL | 2026-09-04 | settle gas p50 675k (verify() precompile + decode + 17-step predicate + vault transfers, one tx); source->settlement p50 570s on-chain. n=2. Concurrency/restart-recovery + larger n pending. |
 | S14 | Open-source residue | PARTIAL | 2026-09-04 | CONTRIBUTIONS.md: 4 reproducible upstream opportunities (C1 CC3 mixHash breaks foundry, C2 SDK ChainInfoProvider gaps, C3 docs receipt-envelope, C4 replay-key helper). PRs not filed without maintainer go-ahead. |
-| S15 | Submission integrity + judge path | PARTIAL | 2026-09-04 | README/WHITEPAPER/submission-facts/claims/GATES synchronized to the hardened deployment; CI GREEN — all 4 jobs (contracts, slither, packages, evidence): 17 forge + 14 vitest + web export + json validation; clean-room web check 5/5; judge path + demo script in docs/judge-path.md. Video not recorded. |
+| S15 | Submission integrity + judge path | PARTIAL | 2026-09-04 | hosted GitHub Actions GREEN on all 4 jobs (contracts/slither/packages/evidence) — run 33867575470, commit d41c13b; forge-std pinned as git submodule (reproducible from fresh checkout); README/WHITEPAPER/submission-facts/claims/GATES synced to hardened deployment; clean-room web 5/5. Canonical-commit freeze + final demo scripts pending closure of S11-S14. |
 
 ## S0 — PASS (2026-09-03)
 

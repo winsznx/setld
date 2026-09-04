@@ -118,5 +118,18 @@
     "verify": "https://setld.pages.dev/verify",
     "repository": "https://github.com/winsznx/setld"
   },
-  "deployedAtCommit": "main HEAD (includes nonReentrant hardening)"
+  "deployedAtCommit": "main HEAD (includes nonReentrant hardening)",
+  "ci": {
+    "provider": "GitHub Actions",
+    "status": "green",
+    "run": "https://github.com/winsznx/setld/actions/runs/33867575470",
+    "commit": "d41c13b",
+    "jobs": [
+      "contracts",
+      "slither",
+      "packages",
+      "evidence"
+    ],
+    "reproducibility": "forge-std pinned as a git submodule (.gitmodules @ v1.16.2); pnpm pinned via packageManager field"
+  }
 }
