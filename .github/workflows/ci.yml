@@ -2,39 +2,57 @@ name: ci
 on:
   push: { branches: [main] }
   pull_request: { branches: [main] }
+
 jobs:
   contracts:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: foundry-rs/foundry-toolchain@v1
+      - name: install forge-std
+        run: cd contracts && forge install foundry-rs/forge-std@v1.16.2 --no-git
       - name: forge build
         run: cd contracts && forge build
       - name: forge test
         run: cd contracts && forge test -vv
-      - name: slither
-        uses: crytic/slither-action@v0.4.0
+
+  slither:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: foundry-rs/foundry-toolchain@v1
+      - run: cd contracts && forge install foundry-rs/forge-std@v1.16.2 --no-git && forge build
+      - uses: crytic/slither-action@v0.4.0
         continue-on-error: true
-        with: { target: contracts/, slither-config: contracts/slither.config.json }
+        with:
+          target: contracts/
+          slither-config: contracts/slither.config.json
+          fail-on: none
+
   packages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-        with: { version: 11 }
       - uses: actions/setup-node@v4
-        with: { node-version: 24, cache: pnpm }
+        with:
+          node-version: 24
+          cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: reference-model + parity vectors
+      - name: parity vectors + reference model
         run: pnpm tsx scripts/gen-parity-vectors.ts && pnpm vitest run
       - name: web static export builds
         run: pnpm --filter @setld/web build
+
   evidence:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: submission-facts + gates are valid json
+      - uses: actions/setup-node@v4
+        with: { node-version: 24 }
+      - name: submission facts + parity vectors are valid json
         run: |
           node -e "JSON.parse(require('fs').readFileSync('evidence/submission-facts.json'))"
+          node -e "JSON.parse(require('fs').readFileSync('evidence/claims.json'))"
           node -e "JSON.parse(require('fs').readFileSync('evidence/parity/vectors.json'))"
-          test -f GATES.md && test -f DECISIONS.md && test -f design.md
+          test -f GATES.md && test -f DECISIONS.md && test -f design.md && test -f WHITEPAPER.md

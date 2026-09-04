@@ -12,4 +12,3 @@ broadcast/**/dry-run/
 contracts/lib/
 contracts/out/
 contracts/cache/
-apps/web/data/proofs/

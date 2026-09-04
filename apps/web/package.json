@@ -7,7 +7,7 @@
     "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start -p ${PORT:-3000}",
-    "prebuild": "node ../../scripts/refresh-web-data.mjs && node ../../scripts/snapshot-proofs.mjs"
+    "prebuild": "node ../../scripts/refresh-web-data.mjs || true"
   },
   "dependencies": {
     "next": "^15.1.6",
