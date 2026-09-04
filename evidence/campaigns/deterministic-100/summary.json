@@ -1,0 +1,1 @@
+{"valid":{"count":40,"fulfilled":40,"refused":0},"wrong-param":{"count":20,"fulfilled":0,"refused":20},"wrong-sender":{"count":10,"fulfilled":0,"refused":10},"reverted":{"count":10,"fulfilled":0,"refused":10},"after-deadline":{"count":10,"fulfilled":0,"refused":10},"replay":{"count":10,"fulfilled":0,"refused":10},"invalid_reward_leakage":0,"total":100}

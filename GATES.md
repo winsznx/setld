@@ -16,10 +16,10 @@ No later phase may build on a gate that has not passed.
 | S8 | Public Attestcoin success lifecycle | PASS | 2026-09-04 | mandate 0x2e69eac5, Sepolia exec 0x7a758701 (blk 11629791 status 1), proof txIndex 111, settle 0x6ee3bf87 -> FULFILLED; ref-model agreed; relayer != executor (neutrality). evidence/completed-mandates/canonical-correct.json |
 | S9 | Public Attestcoin refusal lifecycle | PASS | 2026-09-04 | mandate 0x507b1d27, Sepolia exec 0x5e39e355 blk 11629847 **status 1 (succeeded)** with amountIn 25000 > cap 10000, proof txIndex 183, settle 0x8bca31f6 -> INVALID_ATTEMPT (AMOUNT_IN_OVER_CAP step 11); ref-model agreed; reward refunded + 100% bond penalty. evidence/completed-mandates/canonical-wrong-cap.json |
 | S10 | Sponsor-removal / reporter-compromise ablation | PASS | 2026-09-04 | compromised reporter asserted FULFILLED for the S9 over-cap execution -> B0 paid 10 tSETLD reward (invalid_reward_leakage). setld T0 refused the identical execution on-chain (0 leakage). |
-| S11 | Wide-proof campaign | BLOCKED | | needs funded wallets |
+| S11 | Wide-proof campaign | PARTIAL | 2026-09-04 | deterministic 100-case campaign PASS: 40/40 valid fulfilled, 60/60 invalid refused, invalid_reward_leakage=0 (evidence/campaigns/deterministic-100/). Real public Attestcoin proofs: 2 canonical (S8/S9) re-running vs hardened contracts; wider set in progress. |
 | S12 | Product lifecycle + fresh-user proof | PARTIAL | 2026-09-04 | public judge surface LIVE at https://setld.pages.dev (landing + /proof diptych + /verify browser-side recompute + /mandates/[id]), built to design.md, Cloudflare Pages. Agent loop evidence/agent/. Wallet-based creator/executor onboarding UI + Playwright fresh-user tests still pending. |
 | S13 | Production-path evidence | TODO | | |
-| S14 | Open-source residue | TODO | | |
+| S14 | Open-source residue | PARTIAL | 2026-09-04 | CONTRIBUTIONS.md: 4 reproducible upstream opportunities (C1 CC3 mixHash breaks foundry, C2 SDK ChainInfoProvider gaps, C3 docs receipt-envelope, C4 replay-key helper). PRs not filed without maintainer go-ahead. |
 | S15 | Submission integrity + judge path | TODO | | |
 
 ## S0 — PASS (2026-09-03)
