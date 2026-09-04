@@ -2,13 +2,16 @@
   "name": "setld",
   "private": true,
   "packageManager": "pnpm@11.21.0",
-  "engines": { "node": ">=24" },
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "probe:attestcoin": "tsx scripts/probe-attestcoin.ts",
     "seam:verify": "tsx scripts/probe-attestcoin.ts",
     "lint": "eslint .",
     "typecheck": "tsc -b",
-    "test": "vitest run"
+    "test": "vitest run",
+    "verify:mandate": "tsx packages/verifier/src/cli.ts"
   },
   "devDependencies": {
     "tsx": "^4.19.2",

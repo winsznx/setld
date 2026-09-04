@@ -14,7 +14,7 @@
  *  - no reward on non-fulfilment
  *  - no executor penalty without an accepted mandate
  */
-import { AbiCoder, keccak256, getAddress } from 'ethers';
+import { AbiCoder, keccak256, getAddress, solidityPacked } from 'ethers';
 import {
   type Mandate,
   type TreasuryRebalanceTerms,
@@ -32,9 +32,9 @@ import {
 const abi = AbiCoder.defaultAbiCoder();
 
 export function deriveSourceTxKey(chainKey: number, blockHeight: number, txIndex: number): string {
-  return keccak256(
-    abi.encode(['uint64', 'uint64', 'uint32'], [chainKey, blockHeight, txIndex]),
-  );
+  // MUST match SetldAttestcoinAdapter.deriveSourceTxKey:
+  //   keccak256(abi.encodePacked(uint64 chainKey, uint64 height, uint32 txIndex))
+  return keccak256(solidityPacked(['uint64', 'uint64', 'uint32'], [chainKey, blockHeight, txIndex]));
 }
 
 const eq = (a: string, b: string) => {

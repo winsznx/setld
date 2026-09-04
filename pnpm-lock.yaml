@@ -65,6 +65,24 @@ importers:
         specifier: ^6.15.0
         version: 6.17.0
 
+  packages/verifier:
+    dependencies:
+      '@gluwa/usc-sdk':
+        specifier: 0.18.0
+        version: 0.18.0(debug@4.4.3)
+      '@setld/orchestrator':
+        specifier: workspace:*
+        version: link:../../apps/orchestrator
+      '@setld/protocol-types':
+        specifier: workspace:*
+        version: link:../protocol-types
+      '@setld/reference-model':
+        specifier: workspace:*
+        version: link:../reference-model
+      ethers:
+        specifier: ^6.15.0
+        version: 6.17.0
+
 packages:
 
   '@adraffy/ens-normalize@1.11.1':

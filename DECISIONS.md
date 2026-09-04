@@ -66,3 +66,16 @@ foundry/alloy block polling ("missing field `mixHash`", "prevrandao not set"). C
 - CC3 deployment + lifecycle txs are driven by an ethers-based orchestrator
   (`scripts/`), not `forge script`. Sepolia still uses `forge script`.
 - `forge test` (local EVM) is unaffected and remains the contract test path.
+
+## D8 — sourceTxKey derivation: reference model must use abi.encodePacked (2026-09-04)
+
+The independent verifier caught a differential-parity bug: the TS reference model derived
+`sourceTxKey` with `abi.encode` (32-byte-padded) while `SetldAttestcoinAdapter` uses
+`abi.encodePacked(uint64,uint64,uint32)` (20 bytes tight). The two produced different keys.
+The Solidity-only parity tests missed it because they applied the same TS helper on both
+sides rather than cross-checking the on-chain derivation.
+
+Fix: `deriveSourceTxKey` now uses `solidityPacked`. Verified against the live S8 settlement
+(`keccak256(packed(1, 11629791, 111)) == 0x1afdb87d..` == the on-chain consumed key). Added
+a contract-vs-TS assertion to the test suite. Kept the failing verifier output as the
+evidence that caught it.

@@ -1,0 +1,20 @@
+  PASS  reference model matches on-chain classification  (ref=AMOUNT_IN_OVER_CAP on-chain=AMOUNT_IN_OVER_CAP (step 11))
+  PASS  settlement conserves escrow  (paidOut 18.0 == escrowed 18.0)
+
+Result: match
+{
+  "finalState": "INVALID_ATTEMPT",
+  "settlementTx": "0x8bca31f60ad92bb676f5efc0b8ab0f62d4a8a5611f00704ee62357ad6ccd3037",
+  "sourceTxHash": "0x5e39e355f10dc74df3abdac923e8b8cf0592b8a5586b478e634f3438bdfd20e8",
+  "onChainClassification": "AMOUNT_IN_OVER_CAP",
+  "referenceModelClassification": "AMOUNT_IN_OVER_CAP",
+  "attestcoinProof": {
+    "header": 11629847,
+    "txIndex": 183,
+    "verifySingle": true
+  },
+  "sourceTxKey": "0x8c7e1e51e9e242dd3f86e6751614932f74b9467d41c074cef5ce9df4708cd527",
+  "escrowedWei": "18000000000000000000",
+  "paidOutWei": "18000000000000000000",
+  "tamperMode": false
+}

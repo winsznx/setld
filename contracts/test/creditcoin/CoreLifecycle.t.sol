@@ -118,6 +118,18 @@ contract CoreLifecycleTest is Test {
         registry.bindSourceAddress(srcAddr, 0, expiry, abi.encodePacked(r, s, v));
     }
 
+    function test_sourceTxKey_derivation_is_packed() public {
+        // must equal keccak256(abi.encodePacked(uint64,uint64,uint32)); the TS reference
+        // model (solidityPacked) and the live S8 settlement agree with this (DECISIONS D8).
+        uint64 ck = 1;
+        uint64 h = 11_629_791;
+        uint32 idx = 111;
+        assertEq(adapter.deriveSourceTxKey(ck, h, idx), keccak256(abi.encodePacked(ck, h, idx)));
+        assertEq(
+            adapter.deriveSourceTxKey(ck, h, idx), 0x1afdb87d4520c6ac6d8544461baeaea7f0ac7dfed2647769e175fb519c68a04e
+        );
+    }
+
     function test_cancel_returns_all_creator_funds() public {
         bytes32 m = _create(1);
         uint256 before = token.balanceOf(creator);
