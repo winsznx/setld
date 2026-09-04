@@ -1,0 +1,17 @@
+{
+  "recordedAt": "2026-09-04",
+  "gate": "S12",
+  "harness": "apps/web/e2e (Playwright, headless EIP-1193 wallet, private keys stay in the node process)",
+  "target": "https://setld.pages.dev (live deployment)",
+  "renderTests": "8/8 PASS",
+  "covered": [
+    "/, /proof, /verify, /app, /app/create, /app/jobs render on the live deployment",
+    "headless wallet connects and reads Creditcoin CC3 balances through the real useWallet hook",
+    "browser-side independent verifier recomputes the canonical settlement -> Result: match, Attestcoin proof re-verifies on the precompile"
+  ],
+  "transactingLifecycle": {
+    "spec": "apps/web/e2e/lifecycle.spec.ts",
+    "status": "written; runs the full creator publish + executor bind/accept/execute/attest-wait/settle through the deployed UI with the funded disposable keys",
+    "deferredReason": "needs exclusive nonce access; scheduled after the S11 public campaign to avoid collision"
+  }
+}
