@@ -103,5 +103,11 @@
     "The 100-case deterministic campaign runs on a Foundry fork, not public testnet.",
     "The reporter-compromise ablation uses 2 matched real executions; it demonstrates the mechanism, it is not a large-sample study.",
     "CC3 RPC omits mixHash; CC3 contracts are compiled with evm_version london and deployed via an ethers orchestrator rather than forge script."
-  ]
+  ],
+  "deployedUrls": {
+    "web": "https://setld.pages.dev",
+    "proof": "https://setld.pages.dev/proof",
+    "verify": "https://setld.pages.dev/verify",
+    "repository": "https://github.com/winsznx/setld"
+  }
 }

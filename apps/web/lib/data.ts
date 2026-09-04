@@ -1,14 +1,8 @@
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-
-import { existsSync } from 'node:fs';
-const LOCAL = resolve(process.cwd(), 'data');
-const ROOT = resolve(process.cwd(), '../..');
-const read = (p: string) => {
-  const local = resolve(LOCAL, p.replace(/^evidence\//, ''));
-  const path = existsSync(local) ? local : resolve(ROOT, p);
-  return JSON.parse(readFileSync(path, 'utf8'));
-};
+import factsJson from '../data/submission-facts.json';
+import correct from '../data/completed-mandates/canonical-correct.json';
+import wrongCap from '../data/completed-mandates/canonical-wrong-cap.json';
+import ablationJson from '../data/campaigns/ablations/reporter-compromise.json';
+import agentJson from '../data/agent/decision-log.json';
 
 export interface Facts {
   productDescription: string;
@@ -24,7 +18,7 @@ export interface Facts {
 }
 
 export function facts(): Facts {
-  return read('evidence/submission-facts.json');
+  return factsJson as unknown as Facts;
 }
 
 export interface CompletedMandate {
@@ -40,20 +34,28 @@ export interface CompletedMandate {
   match: string;
 }
 
+const MANDATES: Record<string, CompletedMandate> = {
+  'canonical-correct': correct as unknown as CompletedMandate,
+  'canonical-wrong-cap': wrongCap as unknown as CompletedMandate,
+};
 export function completed(label: string): CompletedMandate {
-  return read(`evidence/completed-mandates/${label}.json`);
+  return MANDATES[label]!;
 }
-
-export function ablation() {
-  return read('evidence/campaigns/ablations/reporter-compromise.json');
+export interface Ablation {
+  honestParity: { disagreements: number; verdict: string };
+  reporterCompromise: {
+    invalid_reward_leakage_count_B0: number;
+    invalid_reward_leakage_value_B0_wei: string;
+    invalid_reward_leakage_count_T0_setld: number;
+    verdict: string;
+  };
+  results: unknown[];
 }
-
+export function ablation(): Ablation {
+  return ablationJson as unknown as Ablation;
+}
 export function agentLog() {
-  try {
-    return read('evidence/agent/decision-log.json');
-  } catch {
-    return null;
-  }
+  return agentJson as unknown as { outcomes: { decision: string; mandateId: string; rationale: string }[]; log: { step: string; data: { model?: string } }[] } | null;
 }
 
 export const SEPOLIA_EXPLORER = 'https://sepolia.etherscan.io';
@@ -62,11 +64,4 @@ export const CC3_EXPLORER = 'https://dashboard.cc3-testnet.creditcoin.network';
 export function short(hex: string, head = 6, tail = 4): string {
   if (!hex || hex.length < head + tail + 2) return hex;
   return `${hex.slice(0, 2 + head)}…${hex.slice(-tail)}`;
-}
-
-export function tSetld(wei: string | bigint): string {
-  const n = BigInt(wei);
-  const whole = n / 10n ** 18n;
-  const frac = (n % 10n ** 18n).toString().padStart(18, '0').replace(/0+$/, '').slice(0, 4);
-  return frac ? `${whole}.${frac} tSETLD` : `${whole}.00 tSETLD`;
 }

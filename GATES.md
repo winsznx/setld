@@ -17,7 +17,7 @@ No later phase may build on a gate that has not passed.
 | S9 | Public Attestcoin refusal lifecycle | PASS | 2026-09-04 | mandate 0x507b1d27, Sepolia exec 0x5e39e355 blk 11629847 **status 1 (succeeded)** with amountIn 25000 > cap 10000, proof txIndex 183, settle 0x8bca31f6 -> INVALID_ATTEMPT (AMOUNT_IN_OVER_CAP step 11); ref-model agreed; reward refunded + 100% bond penalty. evidence/completed-mandates/canonical-wrong-cap.json |
 | S10 | Sponsor-removal / reporter-compromise ablation | PASS | 2026-09-04 | compromised reporter asserted FULFILLED for the S9 over-cap execution -> B0 paid 10 tSETLD reward (invalid_reward_leakage). setld T0 refused the identical execution on-chain (0 leakage). |
 | S11 | Wide-proof campaign | BLOCKED | | needs funded wallets |
-| S12 | Product lifecycle + fresh-user proof | PARTIAL | 2026-09-04 | agent loop: real model ACCEPT (+on-chain accept/execute) + real model ABSTAIN + guardrail ABSTAIN, evidence/agent/. Web product (design.md ready) + fresh-user tests pending. |
+| S12 | Product lifecycle + fresh-user proof | PARTIAL | 2026-09-04 | public judge surface LIVE at https://setld.pages.dev (landing + /proof diptych + /verify browser-side recompute + /mandates/[id]), built to design.md, Cloudflare Pages. Agent loop evidence/agent/. Wallet-based creator/executor onboarding UI + Playwright fresh-user tests still pending. |
 | S13 | Production-path evidence | TODO | | |
 | S14 | Open-source residue | TODO | | |
 | S15 | Submission integrity + judge path | TODO | | |

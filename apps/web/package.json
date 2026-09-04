@@ -7,14 +7,13 @@
     "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start -p ${PORT:-3000}",
-    "prebuild": "node scripts-copy-evidence.mjs"
+    "prebuild": "node scripts-copy-evidence.mjs && node ../../scripts/snapshot-proofs.mjs || true"
   },
   "dependencies": {
     "next": "^15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "ethers": "^6.15.0",
-    "@gluwa/usc-sdk": "0.18.0"
+    "ethers": "^6.15.0"
   },
   "devDependencies": {
     "@types/node": "^22",
