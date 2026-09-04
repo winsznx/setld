@@ -1,0 +1,48 @@
+{
+  "recordedAt": "2026-09-04T00:03:48.931Z",
+  "gate": "S2",
+  "replayRejection": {
+    "consumedSourceTxKey": "0x1afdb87d4520c6ac6d8544461baeaea7f0ac7dfed2647769e175fb519c68a04e",
+    "originalSettlement": "0x6ee3bf874102a2e1b15d0dca667bbe4038aeb08179b6ebc410465eddc1f99451",
+    "freshMandate": "0x8da64f6e0e2001aaf6fd437e0fa7dc9fe26736051c9ce561d674806f835f5cc3",
+    "resubmittedProofFor": "0x7a75870118074921debc68321ee969e3bb4b08850f638982954f5c448f0bb6d3",
+    "rejected": true,
+    "revertReason": "execution reverted (unknown custom error) (action=\"estimateGas\", data=\"0x6dc576241afdb87d4520c6ac6d8544461baeaea7f0ac7dfed2647769e175fb519c68a04e\", reason=null, transaction={ \"data\": \"0x5c9657138da64f6e0e2001aaf6fd437e0fa7dc9fe26736051c9ce561d674806f835f5cc3000000000000000000000000000000000000000000"
+  },
+  "submitterNeutrality": {
+    "settlementTx": "0x6ee3bf874102a2e1b15d0dca667bbe4038aeb08179b6ebc410465eddc1f99451",
+    "submitter": "0x03D9bd775aE2D7757e79B9CC6B9abDaE85D27b66",
+    "submitterIsCreator": false,
+    "submitterIsExecutor": false,
+    "rewardBeneficiary": "0xb3Fbde35DcA37D65F19f2b40BbC2e8E6Fef3956C",
+    "rewardWentToExecutor": true,
+    "submitterReceivedOnly": "relayer-reimbursement",
+    "transfers": [
+      {
+        "to": "0x03D9bd775aE2D7757e79B9CC6B9abDaE85D27b66",
+        "amount": "1000000000000000000",
+        "reason": "relayer-reimbursement"
+      },
+      {
+        "to": "0xb3Fbde35DcA37D65F19f2b40BbC2e8E6Fef3956C",
+        "amount": "9500000000000000000",
+        "reason": "reward"
+      },
+      {
+        "to": "0xA629431b12fcf2EF838966b79cD2ba0Ea452d738",
+        "amount": "500000000000000000",
+        "reason": "protocol-fee"
+      },
+      {
+        "to": "0xb3Fbde35DcA37D65F19f2b40BbC2e8E6Fef3956C",
+        "amount": "5000000000000000000",
+        "reason": "executor-bond-return"
+      },
+      {
+        "to": "0xA629431b12fcf2EF838966b79cD2ba0Ea452d738",
+        "amount": "2000000000000000000",
+        "reason": "creator-bond-return"
+      }
+    ]
+  }
+}

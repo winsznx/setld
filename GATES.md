@@ -7,7 +7,7 @@ No later phase may build on a gate that has not passed.
 |---|---|---|---|---|
 | S0 | Live environment + dependency lock | PASS | 2026-09-03 | `evidence/manifests/environment.json`, `scripts/probe-attestcoin.ts` |
 | S1 | Verified field extraction (all `TreasuryRebalancePredicateV1` fields) | PASS | 2026-09-03 | `evidence/manifests/environment.json` `requiredFieldMatrix`, `missingRequiredFields: []` |
-| S2 | Replay, source identity, relayer neutrality | PARTIAL | 2026-09-03 | reference-model proves replay reject + sender binding + submitter independence; on-chain proof pending funding |
+| S2 | Replay, source identity, relayer neutrality | PASS | 2026-09-04 | on-chain: S8 proof re-submitted vs fresh mandate reverted SourceTxAlreadyConsumed(0x1afdb87d..); S8 settle submitted by relayer 0x03D9..7b66 (not creator/executor), reward went to executor. evidence/negative/replay-and-neutrality.json |
 | S3 | Router-optional seam | TODO | | |
 | S4 | Reference model | PASS (fuzz pending) | 2026-09-03 | 14/14 model + 16/16 predicate parity + settlement-economics parity (per-recipient deltas + conservation). Property/fuzz layer still to add. |
 | S5 | Baseline harness parity | TODO | | |
