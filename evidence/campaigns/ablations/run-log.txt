@@ -1,0 +1,52 @@
+    "disagreements": 0,
+    "verdict": "PASS — B0 and setld agree on every case under an honest reporter"
+  },
+  "reporterCompromise": {
+    "invalid_reward_leakage_count_B0": 1,
+    "invalid_reward_leakage_value_B0_wei": "10000000000000000000",
+    "invalid_reward_leakage_count_T0_setld": 0,
+    "invalid_reward_leakage_value_T0_setld_wei": "0",
+    "verdict": "PASS — a compromised reporter leaked reward through B0 for an execution that setld refused with the same predicate and inputs"
+  },
+  "results": [
+    {
+      "case": "correct",
+      "sepoliaExecuteTx": "0x7a75870118074921debc68321ee969e3bb4b08850f638982954f5c448f0bb6d3",
+      "setld_T0": {
+        "terminal": "FULFILLED",
+        "code": "FULFILLED"
+      },
+      "reporter_honest_judgment": "FULFILLED",
+      "honest_B0_matches_setld": true,
+      "honest_B0": {
+        "settleTx": "0x066cf9f3d72108426ca6b7944f402b3d49c1f49a549612af08363de05880d60a",
+        "executorGain": "14.5",
+        "rewardPaid": true
+      },
+      "compromised_B0": "n/a (execution was genuinely fulfilling)"
+    },
+    {
+      "case": "over-cap",
+      "sepoliaExecuteTx": "0x5e39e355f10dc74df3abdac923e8b8cf0592b8a5586b478e634f3438bdfd20e8",
+      "setld_T0": {
+        "terminal": "INVALID_ATTEMPT",
+        "code": "AMOUNT_IN_OVER_CAP"
+      },
+      "reporter_honest_judgment": "AMOUNT_IN_OVER_CAP",
+      "honest_B0_matches_setld": true,
+      "honest_B0": {
+        "settleTx": "0x56296ff5b2b218f39d94935c7078ce622e5f64ea4bbf232671c16edaffdcad29",
+        "executorGain": "0.0",
+        "rewardPaid": false
+      },
+      "compromised_B0": {
+        "settleTx": "0xe9907819a3feca189a06e2c156a01205586a6ab95c90d2ce4a628e725d26b447",
+        "executorGain": "14.5",
+        "rewardPaid": true,
+        "leakedRewardWei": "10000000000000000000"
+      }
+    }
+  ]
+}
+
+[exited with code 0]

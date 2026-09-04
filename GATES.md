@@ -10,12 +10,12 @@ No later phase may build on a gate that has not passed.
 | S2 | Replay, source identity, relayer neutrality | PASS | 2026-09-04 | on-chain: S8 proof re-submitted vs fresh mandate reverted SourceTxAlreadyConsumed(0x1afdb87d..); S8 settle submitted by relayer 0x03D9..7b66 (not creator/executor), reward went to executor. evidence/negative/replay-and-neutrality.json |
 | S3 | Router-optional seam | TODO | | |
 | S4 | Reference model | PASS (fuzz pending) | 2026-09-03 | 14/14 model + 16/16 predicate parity + settlement-economics parity (per-recipient deltas + conservation). Property/fuzz layer still to add. |
-| S5 | Baseline harness parity | TODO | | |
+| S5 | Baseline harness parity | PASS | 2026-09-04 | B0 (BaselineReporterSettlement 0x51318188) and setld T0 agree on both real executions under an honest reporter; 0 disagreements. evidence/campaigns/ablations/reporter-compromise.json |
 | S6 | Core contracts + agent local composition | PARTIAL | 2026-09-03 | full 3-layer differential parity PASS (ref-model / Solidity predicate / SetldCore economics); local e2e lifecycle + agent + Slither pending |
 | S7 | Economic + incentive model | TODO | | |
 | S8 | Public Attestcoin success lifecycle | PASS | 2026-09-04 | mandate 0x2e69eac5, Sepolia exec 0x7a758701 (blk 11629791 status 1), proof txIndex 111, settle 0x6ee3bf87 -> FULFILLED; ref-model agreed; relayer != executor (neutrality). evidence/completed-mandates/canonical-correct.json |
 | S9 | Public Attestcoin refusal lifecycle | PASS | 2026-09-04 | mandate 0x507b1d27, Sepolia exec 0x5e39e355 blk 11629847 **status 1 (succeeded)** with amountIn 25000 > cap 10000, proof txIndex 183, settle 0x8bca31f6 -> INVALID_ATTEMPT (AMOUNT_IN_OVER_CAP step 11); ref-model agreed; reward refunded + 100% bond penalty. evidence/completed-mandates/canonical-wrong-cap.json |
-| S10 | Sponsor-removal / reporter-compromise ablation | TODO | | |
+| S10 | Sponsor-removal / reporter-compromise ablation | PASS | 2026-09-04 | compromised reporter asserted FULFILLED for the S9 over-cap execution -> B0 paid 10 tSETLD reward (invalid_reward_leakage). setld T0 refused the identical execution on-chain (0 leakage). |
 | S11 | Wide-proof campaign | BLOCKED | | needs funded wallets |
 | S12 | Product lifecycle + fresh-user proof | PARTIAL | 2026-09-04 | agent loop: real model ACCEPT (+on-chain accept/execute) + real model ABSTAIN + guardrail ABSTAIN, evidence/agent/. Web product (design.md ready) + fresh-user tests pending. |
 | S13 | Production-path evidence | TODO | | |

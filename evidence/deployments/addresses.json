@@ -13,7 +13,8 @@
       "SetldVault": "0x3a1f476b5A24CE85A173360e6D0e86A2dDAf7d5d",
       "SetldExecutorRegistry": "0x7E873746199c7869f37db1074787A4d78038af91",
       "SetldAttestcoinAdapter": "0x324D83Ed022cC976F602712eaecf6C37Bd34ddF3",
-      "tSETLD": "0xf30A0f56AF00D0f514fEE13D2f48aDD49A7AFE1A"
+      "tSETLD": "0xf30A0f56AF00D0f514fEE13D2f48aDD49A7AFE1A",
+      "BaselineReporterSettlement": "0x513181882743A3b692A2dC6363f69AD919f57496"
     },
     "attestcoin": {
       "blockProverPrecompile": "0x0000000000000000000000000000000000000FD2",
@@ -29,7 +30,8 @@
       "executorOwner": "0xb3Fbde35DcA37D65F19f2b40BbC2e8E6Fef3956C",
       "relayer": "0x03D9bd775aE2D7757e79B9CC6B9abDaE85D27b66"
     },
-    "redeployedAt": "2026-09-03T23:38:49.312Z"
+    "redeployedAt": "2026-09-03T23:38:49.312Z",
+    "baselineReporter": "0x03D9bd775aE2D7757e79B9CC6B9abDaE85D27b66"
   },
   "sepolia": {
     "network": "Ethereum Sepolia",

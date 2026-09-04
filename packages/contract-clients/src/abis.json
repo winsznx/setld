@@ -3007,5 +3007,245 @@
    ],
    "anonymous": false
   }
+ ],
+ "BaselineReporterSettlement": [
+  {
+   "type": "constructor",
+   "inputs": [
+    {
+     "name": "_reporter",
+     "type": "address",
+     "internalType": "address"
+    },
+    {
+     "name": "_feeRecipient",
+     "type": "address",
+     "internalType": "address"
+    }
+   ],
+   "stateMutability": "nonpayable"
+  },
+  {
+   "type": "function",
+   "name": "feeRecipient",
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "",
+     "type": "address",
+     "internalType": "address"
+    }
+   ],
+   "stateMutability": "view"
+  },
+  {
+   "type": "function",
+   "name": "jobs",
+   "inputs": [
+    {
+     "name": "",
+     "type": "bytes32",
+     "internalType": "bytes32"
+    }
+   ],
+   "outputs": [
+    {
+     "name": "creator",
+     "type": "address",
+     "internalType": "address"
+    },
+    {
+     "name": "executor",
+     "type": "address",
+     "internalType": "address"
+    },
+    {
+     "name": "token",
+     "type": "address",
+     "internalType": "address"
+    },
+    {
+     "name": "reward",
+     "type": "uint256",
+     "internalType": "uint256"
+    },
+    {
+     "name": "executorBond",
+     "type": "uint256",
+     "internalType": "uint256"
+    },
+    {
+     "name": "creatorBond",
+     "type": "uint256",
+     "internalType": "uint256"
+    },
+    {
+     "name": "protocolFeeBps",
+     "type": "uint16",
+     "internalType": "uint16"
+    },
+    {
+     "name": "settled",
+     "type": "bool",
+     "internalType": "bool"
+    }
+   ],
+   "stateMutability": "view"
+  },
+  {
+   "type": "function",
+   "name": "openJob",
+   "inputs": [
+    {
+     "name": "jobId",
+     "type": "bytes32",
+     "internalType": "bytes32"
+    },
+    {
+     "name": "executor",
+     "type": "address",
+     "internalType": "address"
+    },
+    {
+     "name": "token",
+     "type": "address",
+     "internalType": "address"
+    },
+    {
+     "name": "reward",
+     "type": "uint256",
+     "internalType": "uint256"
+    },
+    {
+     "name": "executorBond",
+     "type": "uint256",
+     "internalType": "uint256"
+    },
+    {
+     "name": "creatorBond",
+     "type": "uint256",
+     "internalType": "uint256"
+    },
+    {
+     "name": "protocolFeeBps",
+     "type": "uint16",
+     "internalType": "uint16"
+    }
+   ],
+   "outputs": [],
+   "stateMutability": "nonpayable"
+  },
+  {
+   "type": "function",
+   "name": "reporter",
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "",
+     "type": "address",
+     "internalType": "address"
+    }
+   ],
+   "stateMutability": "view"
+  },
+  {
+   "type": "function",
+   "name": "settleByReport",
+   "inputs": [
+    {
+     "name": "jobId",
+     "type": "bytes32",
+     "internalType": "bytes32"
+    },
+    {
+     "name": "outcome",
+     "type": "uint8",
+     "internalType": "enum BaselineReporterSettlement.Outcome"
+    },
+    {
+     "name": "reportedSourceTx",
+     "type": "string",
+     "internalType": "string"
+    }
+   ],
+   "outputs": [],
+   "stateMutability": "nonpayable"
+  },
+  {
+   "type": "event",
+   "name": "JobOpened",
+   "inputs": [
+    {
+     "name": "jobId",
+     "type": "bytes32",
+     "indexed": true,
+     "internalType": "bytes32"
+    },
+    {
+     "name": "creator",
+     "type": "address",
+     "indexed": false,
+     "internalType": "address"
+    },
+    {
+     "name": "executor",
+     "type": "address",
+     "indexed": false,
+     "internalType": "address"
+    },
+    {
+     "name": "reward",
+     "type": "uint256",
+     "indexed": false,
+     "internalType": "uint256"
+    }
+   ],
+   "anonymous": false
+  },
+  {
+   "type": "event",
+   "name": "JobSettledByReport",
+   "inputs": [
+    {
+     "name": "jobId",
+     "type": "bytes32",
+     "indexed": true,
+     "internalType": "bytes32"
+    },
+    {
+     "name": "outcome",
+     "type": "uint8",
+     "indexed": false,
+     "internalType": "enum BaselineReporterSettlement.Outcome"
+    },
+    {
+     "name": "reportedSourceTx",
+     "type": "string",
+     "indexed": false,
+     "internalType": "string"
+    }
+   ],
+   "anonymous": false
+  },
+  {
+   "type": "error",
+   "name": "AlreadySettled",
+   "inputs": []
+  },
+  {
+   "type": "error",
+   "name": "JobExists",
+   "inputs": []
+  },
+  {
+   "type": "error",
+   "name": "JobMissing",
+   "inputs": []
+  },
+  {
+   "type": "error",
+   "name": "NotReporter",
+   "inputs": []
+  }
  ]
 }
