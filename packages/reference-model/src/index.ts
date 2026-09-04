@@ -261,12 +261,14 @@ export function settleTimeout(
   if (!mandate.acceptedExecutor) throw new Error('missing executor');
   const v = opts.vaultAddress;
   const penalty = applyPenalty(mandate.executorBond, PENALTY_BPS.TIMED_OUT);
-  const transfers: Transfer[] = [
-    { asset: mandate.rewardToken, from: v, to: mandate.creator, amount: mandate.rewardAmount, reason: 'reward-refund' },
-    { asset: mandate.bondToken, from: v, to: mandate.creator, amount: penalty, reason: 'executor-bond-penalty' },
-    { asset: mandate.bondToken, from: v, to: mandate.acceptedExecutor, amount: mandate.executorBond - penalty, reason: 'executor-bond-return' },
-    { asset: mandate.bondToken, from: v, to: mandate.creator, amount: mandate.creatorBond, reason: 'creator-bond-return' },
-  ].filter((t) => t.amount > 0n);
+  const transfers: Transfer[] = (
+    [
+      { asset: mandate.rewardToken, from: v, to: mandate.creator, amount: mandate.rewardAmount, reason: 'reward-refund' },
+      { asset: mandate.bondToken, from: v, to: mandate.creator, amount: penalty, reason: 'executor-bond-penalty' },
+      { asset: mandate.bondToken, from: v, to: mandate.acceptedExecutor, amount: mandate.executorBond - penalty, reason: 'executor-bond-return' },
+      { asset: mandate.bondToken, from: v, to: mandate.creator, amount: mandate.creatorBond, reason: 'creator-bond-return' },
+    ] satisfies Transfer[]
+  ).filter((t) => t.amount > 0n);
   return {
     mandateId: mandate.mandateId,
     priorState: mandate.state,

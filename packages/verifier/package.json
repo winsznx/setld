@@ -3,12 +3,18 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
-  "bin": { "setld-verify": "./src/cli.ts" },
+  "bin": {
+    "setld-verify": "./src/cli.ts"
+  },
   "dependencies": {
     "@gluwa/usc-sdk": "0.18.0",
     "@setld/orchestrator": "workspace:*",
     "@setld/reference-model": "workspace:*",
     "@setld/protocol-types": "workspace:*",
     "ethers": "^6.15.0"
+  },
+  "exports": {
+    ".": "./src/verify.ts",
+    "./verify": "./src/verify.ts"
   }
 }

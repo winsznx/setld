@@ -1,0 +1,8 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/api/verify/route": "/api/verify",
+  "/verify/page": "/verify",
+  "/page": "/",
+  "/mandates/[id]/page": "/mandates/[id]",
+  "/proof/page": "/proof"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@setld/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p ${PORT:-3000}",
+    "prebuild": "node scripts-copy-evidence.mjs"
+  },
+  "dependencies": {
+    "next": "^15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "ethers": "^6.15.0",
+    "@gluwa/usc-sdk": "0.18.0",
+    "@setld/verifier": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "typescript": "^5.9.2"
+  }
+}

@@ -84,8 +84,9 @@ export async function verifyMandate(mandateId: string, opts: { tamper?: boolean;
   // re-derive + re-verify the Attestcoin proof
   const sepRc = await sepolia.getTransactionReceipt(sourceTxHash);
   const ci = new chainInfo.PrecompileChainInfoProvider(cc3 as never);
-  const attested = await ci.is_height_attested?.(SOURCE_CHAIN_KEY, sepRc!.blockNumber).catch(() => true) ?? true;
-  ok('source block still attested', Boolean(attested), `block ${sepRc!.blockNumber}`);
+  const latest = await ci.getLatestAttestedHeightAndHash(SOURCE_CHAIN_KEY);
+  const attested = Number(latest.height) >= (sepRc?.blockNumber ?? 0);
+  ok('source block within attested range', attested, `block ${sepRc?.blockNumber} <= latest attested ${latest.height}`);
 
   const pb = new proofProvider.service.ProofBuilder(SOURCE_CHAIN_KEY, PROOF_BUILDER);
   const proofRes = await pb.getProof(sourceTxHash);

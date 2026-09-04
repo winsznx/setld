@@ -1,0 +1,227 @@
+{
+  "recordedAt": "2026-09-04T00:00:52.863Z",
+  "policy": {
+    "allowedTemplateIds": [
+      "0x22ab9b097675d9b6da95abf9fa499d73091ba2c6c7406d230ad33321976ba0c3"
+    ],
+    "allowedTargets": [
+      "0xdcf3bb782f28279c6271b20dc5e3ed8f8d83c537",
+      "0x6ccb5496e2752bda84730122832ae732ae96d389"
+    ],
+    "maxExecutorBondWei": "10000000000000000000",
+    "minRewardWei": "1000000000000000000",
+    "maxSourceGasWei": "50000000000000000",
+    "minDeadlineMarginBlocks": 20,
+    "minNetMarginWei": "5000000000000000"
+  },
+  "approvedRoutes": [
+    "direct-vault-rebalance"
+  ],
+  "guardrailAuthority": "deterministic — the model cannot bypass, mark success, or choose payout",
+  "log": [
+    {
+      "step": "OBSERVE",
+      "mandateId": "-",
+      "at": "2026-09-03T23:59:54.995Z",
+      "data": {
+        "openCandidates": 9,
+        "cc3Head": 5426025,
+        "sepoliaHead": 11629879
+      }
+    },
+    {
+      "step": "ANALYZE",
+      "mandateId": "0xf7d1d1a7b590223deeca338aea7b24a17ab7942715c96039e72b269821398273",
+      "at": "2026-09-03T23:59:56.862Z",
+      "data": {
+        "reward": "12.0",
+        "bond": "2.0",
+        "estGas": "0.0001273925584776",
+        "netMargin": "9.9998726074415224",
+        "deadlineMarginBlocks": -25,
+        "guardrails": [
+          "TEMPLATE_NOT_ALLOWED:pass",
+          "TARGET_NOT_ALLOWED:pass",
+          "BOND_TOO_HIGH:pass",
+          "REWARD_TOO_LOW:pass",
+          "GAS_TOO_HIGH:pass",
+          "DEADLINE_TOO_CLOSE:FAIL",
+          "NET_MARGIN_TOO_LOW:pass",
+          "SIMULATION_FAILED:pass"
+        ]
+      }
+    },
+    {
+      "step": "DECIDE",
+      "mandateId": "0xf7d1d1a7b590223deeca338aea7b24a17ab7942715c96039e72b269821398273",
+      "at": "2026-09-03T23:59:56.862Z",
+      "data": {
+        "decision": "ABSTAIN",
+        "by": "guardrail",
+        "failed": [
+          "DEADLINE_TOO_CLOSE"
+        ]
+      }
+    },
+    {
+      "step": "ANALYZE",
+      "mandateId": "0x04e4d448fd33c37639d2d9c13dbc24510d6763008cb351c087c1b493f5d663ec",
+      "at": "2026-09-03T23:59:58.105Z",
+      "data": {
+        "reward": "3.06",
+        "bond": "3.0",
+        "estGas": "0.0001273691471832",
+        "netMargin": "0.0598726308528168",
+        "deadlineMarginBlocks": 385,
+        "guardrails": [
+          "TEMPLATE_NOT_ALLOWED:pass",
+          "TARGET_NOT_ALLOWED:pass",
+          "BOND_TOO_HIGH:pass",
+          "REWARD_TOO_LOW:pass",
+          "GAS_TOO_HIGH:pass",
+          "DEADLINE_TOO_CLOSE:pass",
+          "NET_MARGIN_TOO_LOW:pass",
+          "SIMULATION_FAILED:pass"
+        ]
+      }
+    },
+    {
+      "step": "ANALYZE",
+      "mandateId": "0x8e1efd162e99aa5682c920be259a2cb187a4ebe0e10e7d0c5b0b512d0c4fb361",
+      "at": "2026-09-04T00:00:11.901Z",
+      "data": {
+        "reward": "15.0",
+        "bond": "2.0",
+        "estGas": "0.000143308141767432",
+        "netMargin": "12.999856691858232568",
+        "deadlineMarginBlocks": 397,
+        "guardrails": [
+          "TEMPLATE_NOT_ALLOWED:pass",
+          "TARGET_NOT_ALLOWED:pass",
+          "BOND_TOO_HIGH:pass",
+          "REWARD_TOO_LOW:pass",
+          "GAS_TOO_HIGH:pass",
+          "DEADLINE_TOO_CLOSE:pass",
+          "NET_MARGIN_TOO_LOW:pass",
+          "SIMULATION_FAILED:pass"
+        ]
+      }
+    },
+    {
+      "step": "DECIDE",
+      "mandateId": "0x8e1efd162e99aa5682c920be259a2cb187a4ebe0e10e7d0c5b0b512d0c4fb361",
+      "at": "2026-09-04T00:00:22.303Z",
+      "data": {
+        "decision": "ACCEPT",
+        "route": "direct-vault-rebalance",
+        "rationale": "Net margin (~13 ETH) is ~6.5x the bond at risk with ample deadline buffer, clearing the 10% threshold by a wide margin.",
+        "model": "claude-sonnet-5"
+      }
+    },
+    {
+      "step": "AUTHORIZE",
+      "mandateId": "0x8e1efd162e99aa5682c920be259a2cb187a4ebe0e10e7d0c5b0b512d0c4fb361",
+      "at": "2026-09-04T00:00:22.810Z",
+      "data": {
+        "route": "direct-vault-rebalance",
+        "bondAtRisk": "2.0"
+      }
+    },
+    {
+      "step": "EXECUTE",
+      "mandateId": "0x8e1efd162e99aa5682c920be259a2cb187a4ebe0e10e7d0c5b0b512d0c4fb361",
+      "at": "2026-09-04T00:00:39.461Z",
+      "data": {
+        "acceptTx": "0xbbf128abda3052bb2ef14df33e1906c32e9038c40987d6645c2639c07e045f71",
+        "sepoliaExecuteTx": "0xdf0701a982c83d107854b980cd6f9b86f8ad3794d12e3f8e2c93ba265079e05d",
+        "sourceBlock": 11629883,
+        "receiptStatus": 1
+      }
+    },
+    {
+      "step": "RECONCILE",
+      "mandateId": "0x8e1efd162e99aa5682c920be259a2cb187a4ebe0e10e7d0c5b0b512d0c4fb361",
+      "at": "2026-09-04T00:00:39.461Z",
+      "data": {
+        "note": "source tx broadcast; Attestcoin proof + setld settlement decide the outcome, not the agent",
+        "sepoliaExecuteTx": "0xdf0701a982c83d107854b980cd6f9b86f8ad3794d12e3f8e2c93ba265079e05d"
+      }
+    },
+    {
+      "step": "ANALYZE",
+      "mandateId": "0x4bc87fd19760022c787772eb003753b6ac4fbaf3344603cab7fa15f4218c2735",
+      "at": "2026-09-04T00:00:40.701Z",
+      "data": {
+        "reward": "3.06",
+        "bond": "3.0",
+        "estGas": "0.000134651085079212",
+        "netMargin": "0.059865348914920788",
+        "deadlineMarginBlocks": 397,
+        "guardrails": [
+          "TEMPLATE_NOT_ALLOWED:pass",
+          "TARGET_NOT_ALLOWED:pass",
+          "BOND_TOO_HIGH:pass",
+          "REWARD_TOO_LOW:pass",
+          "GAS_TOO_HIGH:pass",
+          "DEADLINE_TOO_CLOSE:pass",
+          "NET_MARGIN_TOO_LOW:pass",
+          "SIMULATION_FAILED:pass"
+        ]
+      }
+    },
+    {
+      "step": "DECIDE",
+      "mandateId": "0x4bc87fd19760022c787772eb003753b6ac4fbaf3344603cab7fa15f4218c2735",
+      "at": "2026-09-04T00:00:52.863Z",
+      "data": {
+        "decision": "ABSTAIN",
+        "route": null,
+        "rationale": "Net margin of ~0.0599 ETH is roughly 2% of the 3 ETH bond at risk, well under the ~10% threshold needed to justify putting the full bond on the line.",
+        "model": "claude-sonnet-5"
+      }
+    },
+    {
+      "step": "FEEDBACK",
+      "mandateId": "-",
+      "at": "2026-09-04T00:00:52.863Z",
+      "data": {
+        "decisions": [
+          {
+            "mandateId": "0xf7d1d1a7b590223deeca338aea7b24a17ab7942715c96039e72b269821398273",
+            "decision": "ABSTAIN",
+            "rationale": "guardrail: DEADLINE_TOO_CLOSE"
+          },
+          {
+            "mandateId": "0x8e1efd162e99aa5682c920be259a2cb187a4ebe0e10e7d0c5b0b512d0c4fb361",
+            "decision": "ACCEPT",
+            "rationale": "Net margin (~13 ETH) is ~6.5x the bond at risk with ample deadline buffer, clearing the 10% threshold by a wide margin.",
+            "finalState": "awaiting-settlement"
+          },
+          {
+            "mandateId": "0x4bc87fd19760022c787772eb003753b6ac4fbaf3344603cab7fa15f4218c2735",
+            "decision": "ABSTAIN",
+            "rationale": "Net margin of ~0.0599 ETH is roughly 2% of the 3 ETH bond at risk, well under the ~10% threshold needed to justify putting the full bond on the line."
+          }
+        ]
+      }
+    }
+  ],
+  "outcomes": [
+    {
+      "mandateId": "0xf7d1d1a7b590223deeca338aea7b24a17ab7942715c96039e72b269821398273",
+      "decision": "ABSTAIN",
+      "rationale": "guardrail: DEADLINE_TOO_CLOSE"
+    },
+    {
+      "mandateId": "0x8e1efd162e99aa5682c920be259a2cb187a4ebe0e10e7d0c5b0b512d0c4fb361",
+      "decision": "ACCEPT",
+      "rationale": "Net margin (~13 ETH) is ~6.5x the bond at risk with ample deadline buffer, clearing the 10% threshold by a wide margin.",
+      "finalState": "awaiting-settlement"
+    },
+    {
+      "mandateId": "0x4bc87fd19760022c787772eb003753b6ac4fbaf3344603cab7fa15f4218c2735",
+      "decision": "ABSTAIN",
+      "rationale": "Net margin of ~0.0599 ETH is roughly 2% of the 3 ETH bond at risk, well under the ~10% threshold needed to justify putting the full bond on the line."
+    }
+  ]
+}
