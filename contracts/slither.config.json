@@ -1,0 +1,1 @@
+{ "filter_paths": "lib|test", "exclude_informational": true, "exclude_low": false }

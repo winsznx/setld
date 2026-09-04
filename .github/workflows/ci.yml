@@ -1,0 +1,40 @@
+name: ci
+on:
+  push: { branches: [main] }
+  pull_request: { branches: [main] }
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: foundry-rs/foundry-toolchain@v1
+      - name: forge build
+        run: cd contracts && forge build
+      - name: forge test
+        run: cd contracts && forge test -vv
+      - name: slither
+        uses: crytic/slither-action@v0.4.0
+        continue-on-error: true
+        with: { target: contracts/, slither-config: contracts/slither.config.json }
+  packages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 11 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 24, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - name: reference-model + parity vectors
+        run: pnpm tsx scripts/gen-parity-vectors.ts && pnpm vitest run
+      - name: web static export builds
+        run: pnpm --filter @setld/web build
+  evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: submission-facts + gates are valid json
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('evidence/submission-facts.json'))"
+          node -e "JSON.parse(require('fs').readFileSync('evidence/parity/vectors.json'))"
+          test -f GATES.md && test -f DECISIONS.md && test -f design.md
